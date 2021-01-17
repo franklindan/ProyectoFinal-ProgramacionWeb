@@ -29,6 +29,22 @@ body{
     min-height: 100%;
 }
 
+.img-1{
+    background-image: url('../img/banner.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-2{
+    background-image: url('../img/banner00.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.img-3{
+    background-image: url('../img/banner000.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 @media all and (max-width:992px) {
     .home-inner{
         padding-top: 100px;
