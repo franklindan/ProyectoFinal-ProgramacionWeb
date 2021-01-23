@@ -1,5 +1,5 @@
 :root {
-    --primary: #111854;
+    --primary: #111811;
     --light: #ffffff;
     --grey: #efefef;
 }
@@ -12,6 +12,9 @@ body{
 .bg-primary{
     background-color: var(--primary) !important;
 }
+.bg-light{
+    background-color: var(--light) !important;
+}
 #sidebar-container{
     min-height: 100vh;
 }
@@ -20,4 +23,12 @@ body{
 }
 #sidebar-container .menu{
     width: 18rem; 
+}
+.avatar{
+    max-width: 35px;
+}
+#content{
+    overflow-y: auto;
+    height: 100vh;
+    padding-bottom: 5rem;
 }
