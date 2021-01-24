@@ -4,7 +4,7 @@
 <head>
     
     <meta charset="UTF-8">
-    <title></title>
+    <title>Pukllay 2021 | Login</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0,
     maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -75,7 +75,8 @@
                         <label for="perfil" class="form-label font-weight-bold">Perfil</label>
                         <select class="form-control" name="cboNivel">
 				            <option selected>Delegado</option>
-				            <option>Jurado</option>	<option value="S" >Operario</option>
+                            <option>Jurado</option>	
+                            <option>Operario</option>
 				            <option>Usuario final indirecto</option>
 				            <option>Administrador</option>
 				        </select>	
