@@ -58,15 +58,7 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                <section>
-                    <div class="container">
-                        <h1 class="font-weight-bold mb-0">Bienvenido al Sistema de gestión del evento Pukllay</h1>
-                        <p class="lead text-muted">Jurado:</p>
-                        <p class="text-justify">Se le da la bienvenida al sistema esperando que pueda realizar su labor exitosamente. Recuerde haber leido y revizado el correo que se lenvio a su correo que brindo para obtener el acceso al sistema. Se le vuelve a recalcalcar que el uso del usuario y contraseña es de uso personal e intransferrible. Comunicarse con los administradores ante cualquier inconveniente o escribir al correo que se le envio para su acceso al sistema.</p>
-                        <p class="lead text-muted">Acerca del sistema:</p>
-                        <p class="text-justify">El sistema de gestión del evento Pukllay consiste en facilitar el funcionamiento y gestión del evento carnavalesco electrónicamente mediante un aplicativo web. El Pukllay, es un carnaval originario y considerado el más grande del sur del Perú celebrado para expresar la cultura ancestral que ha perdurado desde el 2003 hasta el presente año. Se lleva a cabo a inicios del mes de marzo, en la ciudad de Andahuaylas y es conocida también como el carnaval originario del Perú que reúne a un promedio de más de 50 comunidades campesinas, distritos, provincias de toda la región de Apurímac; además, de los departamentos del Perú y otros países invitados a participar en este evento. La necesidad de automatizar los procesos de dicho evento surge cuando dicho evento comienza a crecer y evolucionar. En donde el registro de las comparsas y participantes aún se realiza manualmente en hojas de papel para luego ser almacenadas en una base de datos, donde muchos participantes que escucharon del evento y desean participar no tienen la facilidad de informarse más y registrarse en dicho evento, la demora en saber los puntajes de las comparsas en cada etapa. Problemas que podrían ser solucionados perfectamente con un aplicativo web. Por ello se propone la automatización de los procesos de registro de comparsas, calificación de los jurados en un aplicativo web, visualización de las calificaciones y puntajes de las comparsas en tiempo real, administración y gestión del evento Pukllay. La automatización de dichos procesos facilitara el correcto funcionamiento del evento y solucionara los diversos problemas.</p> 
-                    </div>
-                </section>
+                
             </div>
             
         </div>
