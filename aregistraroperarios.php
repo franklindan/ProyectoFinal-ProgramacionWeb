@@ -65,8 +65,8 @@
                         <h1 class="font-weight-bold mb-0 py-2">Registrar operarios</h1>
                         <div class="row pb-2">
                            <div class="col-lg-4">
-                                <select class="form-control" name="cboNivel">
-                                    <option>Seleccionar Pukllay</option>
+                                <select id="listaPuk" class="form-control" name="listaPuk">
+                                    <option value="0">Seleccionar Pukllay</option>
                                     <?php
                                     include_once 'bd/conexion.php';
                                     $objeto = new Conexion();
@@ -78,7 +78,7 @@
                                     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                                     foreach($data as $dat) {
                                     ?>    
-                                    <option><?php echo $dat['idPukllay'] ?></option>
+                                    <option value="<?php echo $dat['idPukllay'] ?>"><?php echo $dat['idPukllay'] ?></option>
                                     <?php
                                     }
                                     $resultado = NULL;
@@ -107,28 +107,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
+                                            
                                             
 
-                                            $consulta = "SELECT * FROM usuario where idPukllay='2021'";
-                                            $resultado = $conexion->prepare($consulta);
-                                            $resultado->execute();
-                                            $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
-                                            foreach($data as $dat) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $dat['idPukllay'] ?></td>
-                                                <td><?php echo $dat['usuarioUsuario'] ?></td>
-                                                <td><?php echo $dat['paswUsuario'] ?></td>
-                                                <td><?php echo $dat['tipoUsuario'] ?></td> 
-                                                <td><?php echo $dat['estadoUsuario'] ?></td>     
-                                                <td></td>
-                                            </tr>
-                                            <?php
-                                            }
-                                            $resultado = NULL;
-                                            $conexion = NULL;
-                                            ?>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
