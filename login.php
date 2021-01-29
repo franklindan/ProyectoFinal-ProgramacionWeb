@@ -83,7 +83,7 @@
                       </div>
                       <div class="mb-4">
                         <label for="dni" class="form-label font-weight-bold">DNI usuario</label>
-                        <input type="email" class="form-control" id="dni" placeholder="Ingrese su dni">
+                        <input type="text" class="form-control" id="dni" placeholder="Ingrese su dni">
                       </div>
                       <div class="mb-4">
                         <label for="contraseña" class="form-label font-weight-bold">Contraseña</label>
@@ -92,6 +92,52 @@
                       </div>
                       <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
                     </form>
+                    <?php
+                    require_once 'loginDatos.php';
+                    $conexion=new mysqli($host,$user,$password,$database,$port);
+                    $idUsuario;
+                    if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+                    
+                    if (isset($_POST['email'])&&
+                        isset($_POST['pass']))
+                    { 
+                        $user=mysql_entities_fix_string($conexion,get_post($conexion, 'email'));
+                        $password=mysql_entities_fix_string($conexion,get_post($conexion, 'pass'));
+                        $query = "SELECT * FROM usuario WHERE coreUsuario='$user'";
+                        $result = $conexion->query($query);
+                        if (!$result) die ("Usurio no encontrado");
+                        elseif ($result->num_rows)
+                        {
+                            $row = $result->fetch_array(MYSQLI_NUM);
+                            $result->close();
+                            if (password_verify($password, $row[3])){
+                                session_start();
+                                $_SESSION['id']=$_POST['email'];
+                                $_SESSION['pass']=$_POST['pass'];
+                                header('location:diario.php');
+                            }
+                            else die("Usuario/password incorrecto");
+                        }
+                        else die("Usuario/password incorrecto");
+                    }
+                    
+                    $conexion->close();
+                    function mysql_entities_fix_string($conexion, $string)
+                    {
+                        return htmlentities(mysql_fix_string($conexion, $string));
+                    }
+                    function mysql_fix_string($conexion, $string)
+                    {
+                        if (get_magic_quotes_gpc()) $string = stripslashes($string);
+                        return $conexion->real_escape_string($string);
+                    }
+                    function get_post($con, $var)
+                    {
+                        return $con->real_escape_string($_POST[$var]);
+                    }
+                    
+                    
+                    ?>
                </div>
                <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
                    <a href="index.html" class="text-decoration-none text-light font-weight-bold">Regresar a la página principal</a>
