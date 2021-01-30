@@ -4,42 +4,42 @@ $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
 // Recepción de los datos enviados mediante POST desde el JS 
-$usuarioUsuario = (isset($_POST['usuarioUsuario'])) ? $_POST['usuarioUsuario'] : '';
-$paswUsuario = (isset($_POST['paswUsuario'])) ? $_POST['paswUsuario'] : '';
-$tipoUsuario = (isset($_POST['tipoUsuario'])) ? $_POST['tipoUsuario'] : '';
-$estadoUsuario = (isset($_POST['estadoUsuario'])) ? $_POST['estadoUsuario'] : '';
+$dniOper = (isset($_POST['dniOper'])) ? $_POST['dniOper'] : '';
+$nombOper = (isset($_POST['nombOper'])) ? $_POST['nombOper'] : '';
+$apelOper = (isset($_POST['apelOper'])) ? $_POST['apelOper'] : '';
+$usuario_usuarioUsuario = (isset($_POST['usuario_usuarioUsuario'])) ? $_POST['usuario_usuarioUsuario'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
-$idPukllay = (isset($_POST['idPukllay'])) ? $_POST['idPukllay'] : '';
+$usuario_idPukllay = (isset($_POST['usuario_idPukllay'])) ? $_POST['usuario_idPukllay'] : '';
 
 switch($opcion){
     case 1: 
-        $consulta = "INSERT INTO usuario (idPukllay,usuarioUsuario,paswUsuario,tipoUsuario,estadoUsuario) VALUES('$idPukllay','$usuarioUsuario','$paswUsuario','$tipoUsuario','$estadoUsuario')";
+        $consulta = "INSERT INTO operario (dniOper,nombOper,apelOper,usuario_usuarioUsuario,usuario_idPukllay) VALUES('$dniOper','$nombOper','$apelOper','$usuario_usuarioUsuario','$usuario_idPukllay')";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
-        $consulta = "SELECT idPukllay,usuarioUsuario,paswUsuario,tipoUsuario,estadoUsuario FROM usuario where usuarioUsuario='$usuarioUsuario'";
+        $consulta = "SELECT dniOper,nombOper,apelOper,usuario_usuarioUsuario,usuario_idPukllay FROM operario where dniOper='$dniOper'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: 
-        $consulta = "update usuario SET paswUsuario='$paswUsuario', tipoUsuario='$tipoUsuario', estadoUsuario='$estadoUsuario' WHERE usuarioUsuario='$usuarioUsuario'";	
+        $consulta = "update operario SET nombOper='$nombOper', apelOper='$apelOper' WHERE dniOper='$dniOper'";	
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT idPukllay,usuarioUsuario,paswUsuario,tipoUsuario,estadoUsuario FROM usuario where usuarioUsuario='$usuarioUsuario'";       
+        $consulta = "SELECT dniOper,nombOper,apelOper,usuario_usuarioUsuario,usuario_idPukllay FROM operario where dniOper='$dniOper'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;        
     case 3:
-        $consulta = "DELETE FROM usuario WHERE usuarioUsuario='$usuarioUsuario'";
+        $consulta = "DELETE FROM operario WHERE dniOper='$dniOper'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;  
     case 4: 
-        $consulta = "SELECT * FROM usuario where idPukllay='$idPukllay'";
+        $consulta = "SELECT * FROM operario where usuario_idPukllay='$usuario_idPukllay'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

@@ -27,9 +27,9 @@
             </div>
             <div class="menu">
                 <a href="administrador.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
+                <a href="administrarusuarios.php" class="d-block p-3 text-light"><i class="icon ion-md-settings mr-2 lead"></i>Administrar usuarios</a>
                 <a href="aregistraroperarios.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar operarios</a>
                 <a href="aregistrarusuariofinal.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar usuario final indirecto</a>
-                <a href="administrarusuarios.php" class="d-block p-3 text-light"><i class="icon ion-md-settings mr-2 lead"></i>Administrar usuarios</a>
                 <a href="areportes.php" class="d-block p-3 text-light"><i class="icon ion-md-clipboard mr-2 lead"></i>Reportes</a>
             </div>
         </div>
@@ -82,12 +82,12 @@
                                     <?php
                                     }
                                     $resultado = NULL;
-                                    //$conexion = NULL;    
+                                    $conexion = NULL;    
                                     ?>
                                 </select>
                             </div>
                             <div class="col-lg-8">
-                                <button id="btnNuevo" type="button"class="btn btn-success">Nuevo registro</button>
+                                <button id="btnNuevo" type="button"class="btn btn-success">Registrar operario</button>
                             </div>
                         </div>
                     </div>
@@ -98,11 +98,11 @@
                                     <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
                                         <thead class="text-center">
                                             <tr>
+                                                <td>dniOperario</td>
+                                                <td>Nombre</td>
+                                                <td>Apellido</td>
+                                                <td>dniUsuario</td>
                                                 <td>idPukllay</td>
-                                                <td>usuario</td>
-                                                <td>password</td>
-                                                <td>tipo</td>
-                                                <td>estado</td>
                                                 <td>acciones</td>
                                             </tr>
                                         </thead>
@@ -131,21 +131,17 @@
                         <form id="formModal" method="post">    
                             <div class="modal-body">
                                 <div class="form-group">
-                                <label for="usuario" class="col-form-label">Usuario:</label>
-                                <input type="text" class="form-control" id="usuario">
+                                <label for="dni" class="col-form-label">dniUsuario:</label>
+                                <input type="text" class="form-control" id="dni">
+                                </div>     
+                                <div class="form-group">
+                                <label for="nombre" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre">
                                 </div>
                                 <div class="form-group">
-                                <label for="password" class="col-form-label">Password:</label>
-                                <input type="password" class="form-control" id="password">
-                                </div>                
-                                <div class="form-group">
-                                <label for="tipo" class="col-form-label">Tipo:</label>
-                                <input type="text" class="form-control" id="tipo">
-                                </div>
-                                <div class="form-group">
-                                <label for="estado" class="col-form-label">Estado:</label>
-                                <input type="text" class="form-control" id="estado">
-                                </div>              
+                                <label for="apellido" class="col-form-label">Apellido:</label>
+                                <input type="text" class="form-control" id="apellido">
+                                </div>                           
                             </div>
                             <div class="modal-footer">
                                 <button type="button" id="btnBorrar"class="btn btn-dark" data-dismiss="modal">Cancelar</button>

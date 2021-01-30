@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title></title>
+    <title>Pukllay 2021 | Delegado</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0,
     maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,11 +26,11 @@
                 <h4 class="text-light font-weight-bold">Pukllay 2021 | Delegado</h4>
             </div>
             <div class="menu">
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar comentarios</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar ranking</a>
+                <a href="delegado.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
+                <a href="dregistrarparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
+                <a href="dvpuntaje.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje</a>
+                <a href="dvcomentarios.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar comentarios</a>
+                <a href="dvranking.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar ranking</a>
             </div>
         </div>
         <div class="w-100">
@@ -85,11 +85,10 @@
 -->
 
 
-    <script src="js/menu.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
+    <script src="js/jsadministrarusuarios.js"></script>
 </body>
 </html>

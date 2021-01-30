@@ -24,38 +24,11 @@ $(document).ready(function(){
         }
     });
     
-$('#listaPuk').on('change', function(){
-    tabla.clear();
-    id = $('#listaPuk').val();
-    opcion = 4; //editar
-    $.ajax({
-        url: "bd/crudaregistraroperarios.php",
-        type: "POST",
-        dataType: "json",
-        data: {usuario_idPukllay:id,opcion:opcion},
-        success: function(data){ 
-            //var datos=JSON.parse(data); 
-            console.log(data);
-            data.forEach(dat => {
-                id = dat['usuario_idPukllay'];            
-                dniOper = dat['dniOper'];
-                nombOper = dat['nombOper'];
-                apelOper = dat['apelOper'];
-                usuario_usuarioUsuario = dat['usuario_usuarioUsuario'];
-                if(opcion == 4){
-                    tabla.row.add([dniOper,nombOper,apelOper,usuario_usuarioUsuario,id]).draw();
-                }    
-            });                 
-        }        
-    });
-       
-});
-
 $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo operario");            
+    $(".modal-title").text("Nuevo usuario");            
     $("#modal").modal("show");        
     id=$('#listaPuk').val();
     opcion = 1; //insertar
@@ -67,19 +40,20 @@ var fila; //capturar la fila para editar o borrar el registro
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
     id=$('#listaPuk').val();
-    dniOper = fila.find('td:eq(0)').text();
-    nombOper = fila.find('td:eq(1)').text();
-    apelOper = fila.find('td:eq(2)').text();
-    usuario_usuarioUsuario = fila.find('td:eq(3)').text();
+    usuario = fila.find('td:eq(1)').text();
+    password = fila.find('td:eq(2)').text();
+    tipo = fila.find('td:eq(3)').text();
+    estado = fila.find('td:eq(4)').text();
     
-    $("#dni").val(dniOper);
-    $("#nombre").val(nombOper);
-    $("#apellido").val(apelOper);
+    $("#usuario").val(usuario);
+    $("#password").val(password);
+    $("#tipo").val(tipo);
+    $("#estado").val(estado);
     opcion = 2; //editar
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar operario");            
+    $(".modal-title").text("Editar usuario");            
     $("#modal").modal("show");  
     
 });
@@ -88,15 +62,15 @@ $(document).on("click", ".btnEditar", function(){
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
     id=$('#listaPuk').val();
-    dniOper = $(this).closest("tr").find('td:eq(0)').text();
+    usuario = $(this).closest("tr").find('td:eq(1)').text();
     opcion = 3 //borrar
-    var respuesta = confirm("¿Está seguro de eliminar el registro: "+dniOper+"?");
+    var respuesta = confirm("¿Está seguro de eliminar el registro: "+usuario+"?");
     if(respuesta){
         $.ajax({
-            url: "bd/crudaregistraroperarios.php",
+            url: "bd/cruddregistrarparticipantes.php",
             type: "POST",
             dataType: "json",
-            data: {opcion:opcion, dniOper:dniOper},
+            data: {opcion:opcion, usuarioUsuario:usuario},
             success: function(){
                 tabla.row(fila.parents('tr')).remove().draw();
             }
@@ -106,27 +80,27 @@ $(document).on("click", ".btnBorrar", function(){
     
 $("#formModal").submit(function(e){
     e.preventDefault();    
-    dniOper = $.trim($("#dni").val());
-    nombOper = $.trim($("#nombre").val());
-    apelOper = $.trim($("#apellido").val());
-    usuario_usuarioUsuario = $.trim($("#dni").val());
+    usuario = $.trim($("#usuario").val());
+    password = $.trim($("#password").val());
+    tipo = $.trim($("#tipo").val());
+    estado = $.trim($("#estado").val());
     $.ajax({
-        url: "bd/crudaregistraroperarios.php",
+        url: "bd/cruddregistrarparticipantes.php",
         type: "POST",
         dataType: "json",
-        data: {usuario_idPukllay:id,dniOper:dniOper,nombOper:nombOper,apelOper:apelOper,usuario_usuarioUsuario:usuario_usuarioUsuario,opcion:opcion},
+        data: {idPukllay:id,usuarioUsuario:usuario,paswUsuario:password,tipoUsuario:tipo,estadoUsuario:estado,opcion:opcion},
         success: function(data){ 
             //var datos=JSON.parse(data);
             console.log(data);
-            id = data[0].usuario_idPukllay;            
-            dniOper = data[0].dniOper;
-            nombOper = data[0].nombOper;
-            apelOper = data[0].apelOper;
-            usuario_usuarioUsuario = data[0].usuario_usuarioUsuario;
+            id = data[0].idPukllay;            
+            usuario = data[0].usuarioUsuario;
+            password = data[0].paswUsuario;
+            tipo = data[0].tipoUsuario;
+            estado = data[0].estadoUsuario;
             if(opcion == 1){
-                tabla.row.add([dniOper,nombOper,apelOper,usuario_usuarioUsuario,id]).draw();}
+                tabla.row.add([id,usuario,password,tipo,estado]).draw();}
             if(opcion == 2){
-                tabla.row(fila).data([dniOper,nombOper,apelOper,usuario_usuarioUsuario,id]).draw();}               
+                tabla.row(fila).data([id,usuario,password,tipo,estado]).draw();}               
         }        
     });
     $("#modal").modal("hide");    

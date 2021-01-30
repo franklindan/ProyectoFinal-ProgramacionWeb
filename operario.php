@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
-    <title></title>
+    <title>Pukllay 2021 | Operario</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0,
     maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,22 +26,22 @@
                 <h4 class="text-light font-weight-bold">Pukllay 2021 | Operario</h4>
             </div>
             <div class="menu">
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
+                <a href="operario.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
                 <a href="#" class="d-block p-3 text-light dropdown-toggle" data-toggle="dropdown">
                     <i class="icon ion-md-add mr-2 lead"></i>Registrar pukllay
                 </a>
                     <div class="dropdown-menu">
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar nuevo pukllay</a>
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar organizadores</a>
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar auspiciadores</a>
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar etapas</a>
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar gastos</a>
-                        <a href="" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar premios</a>
+                        <a href="operarioprpukllay.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar nuevo pukllay</a>
+                        <a href="operarioprorganizadores.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar organizadores</a>
+                        <a href="operarioprauspiciadores.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar auspiciadores</a>
+                        <a href="operariopretapas.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar etapas</a>
+                        <a href="operarioprgastos.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar gastos</a>
+                        <a href="operarioprpremios.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar premios</a>
                     </div>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar jurados</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar delegados</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar comparsas</a>
-                <a href="" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
+                <a href="operariorjurados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar jurados</a>
+                <a href="operariordelegados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar delegados</a>
+                <a href="operariorcomparsas.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar comparsas</a>
+                <a href="operariorparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
             </div>
         </div>
         <div class="w-100">
@@ -96,12 +96,11 @@
 -->
 
 
-    <script src="js/menu.js"></script>
     <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/jquery-3.5.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
+    <script src="js/jsadministrarusuarios.js"></script>
     
 </body>
 </html>
