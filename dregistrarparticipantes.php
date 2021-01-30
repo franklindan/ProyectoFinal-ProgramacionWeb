@@ -20,6 +20,18 @@
 </head>
 
 <body>
+
+    <?php
+    
+    session_start();
+    if (!isset($_SESSION['usuario']))
+    {
+        header("location:login.php");   
+    }
+
+    ?>
+
+
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo">
@@ -85,15 +97,21 @@
                                         </thead>
                                         <tbody>
                                         <?php
-                                            include_once 'bd/conexion.php';
-                                            $objeto = new Conexion();
-                                            $conexion = $objeto->Conectar();
+                                            require_once 'bd/conexiondatos.php';
+                                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
 
-                                            $consulta = "SELECT idComparsa FROM comparsa where delegado_dniDele=''";
-                                            $consulta = "SELECT * FROM participante where idComparsa=''";
-                                            $resultado = $conexion->prepare($consulta);
-                                            $resultado->execute();
-                                            $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                                            $query = "SELECT * FROM comparsa where delegado_dniDele='$_SESSION['usuario']'";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            $row = $result->fetch_array(MYSQLI_NUM);
+                                            $idComparsa = $row[0];
+
+                                            $query = "SELECT * FROM participante where idComparsa='$idComparsa'";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            
+                                            $data = $result->fetch_array(FETCH_ASSOC);
                                             foreach($data as $dat) {
                                             ?>
                                             <tr>
@@ -106,8 +124,8 @@
                                             </tr>
                                             <?php
                                             }
-                                            $resultado = NULL;
-                                            $conexion = NULL;
+                                            $result->close();
+                                            $conexion->close();
                                             ?>   
                                         </tbody>
                                     </table>

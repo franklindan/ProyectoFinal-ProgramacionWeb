@@ -1,3 +1,65 @@
+<?php
+    require_once 'bd/conexiondatos.php';
+    $conexion=new mysqli($host,$user,$password,$database,$port);
+    if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+    if (isset($_POST['dni'])&&
+        isset($_POST['contraseña']))
+    { 
+        $user=mysql_entities_fix_string($conexion,get_post($conexion, 'dni'));
+        $password=mysql_entities_fix_string($conexion,get_post($conexion, 'contraseña'));
+        $query = "SELECT * FROM usuario WHERE usuarioUsuario='$user'";
+        $result = $conexion->query($query);
+        if (!$result) die ("Usurio no encontrado");
+        elseif ($result->num_rows)
+        {
+            $row = $result->fetch_array(MYSQLI_NUM);
+            $result->close();
+            //if (password_verify($password, $row[2])){
+            if ($password==$row[2]){    
+                session_start();
+                $_SESSION['usuario']=$_POST['dni'];
+                $_SESSION['contraseña']=$_POST['contraseña'];
+                if("administrador"==$row[3]){
+                    header('location:administrador.php');
+                }
+                if("delegado"==$row[3]){
+                    header('location:delegado.php');
+                }
+                if("final indirecto"==$row[3]){
+                    header('location:finalindirecto.php');
+                }
+                if("jurado"==$row[3]){
+                    header('location:jurado.php');
+                }
+                if("operario"==$row[3]){
+                    header('location:operario.php');
+                }
+            }
+            else die("Usuario/password incorrecto");
+        }
+        else die("Usuario/password incorrecto");
+    }
+
+    $conexion->close();
+    function mysql_entities_fix_string($conexion, $string)
+    {
+        return htmlentities(mysql_fix_string($conexion, $string));
+    }
+    function mysql_fix_string($conexion, $string)
+    {
+        if (get_magic_quotes_gpc()) $string = stripslashes($string);
+        return $conexion->real_escape_string($string);
+    }
+    function get_post($con, $var)
+    {
+        return $con->real_escape_string($_POST[$var]);
+    }
+
+
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="es">
     
@@ -70,11 +132,11 @@
                </div>
                <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
                    <h1 class="font-weight-bold mb-4">Bienvenido de vuelta</h1>
-                   <form>
+                   <form action="login.php" method="post">
                      <div class="mb-4">
                         <label for="perfil" class="form-label font-weight-bold">Perfil</label>
                         <select class="form-control" name="cboNivel">
-				            <option selected>Delegado</option>
+				            <option>Delegado</option>
                             <option>Jurado</option>	
                             <option>Operario</option>
 				            <option>Usuario final indirecto</option>
@@ -83,64 +145,18 @@
                       </div>
                       <div class="mb-4">
                         <label for="dni" class="form-label font-weight-bold">DNI usuario</label>
-                        <input type="text" class="form-control" id="dni" placeholder="Ingrese su dni">
+                        <input type="text" class="form-control" id="dni" placeholder="Ingrese su dni" name="dni">
                       </div>
                       <div class="mb-4">
                         <label for="contraseña" class="form-label font-weight-bold">Contraseña</label>
-                        <input type="password" class="form-control mb-2" id="contraseña" placeholder="Ingrese su contraseña">
+                        <input type="password" class="form-control mb-2" id="contraseña" placeholder="Ingrese su contraseña" name="contraseña">
                         <a href="" class="form-text text-light text-decoration-none">¿Olvidaste tu contraseña?</a>
                       </div>
-                      <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                      <input type="submit" class="btn btn-primary w-100" value="Iniciar sesión">
                     </form>
-                    <?php
-                    require_once 'loginDatos.php';
-                    $conexion=new mysqli($host,$user,$password,$database,$port);
-                    $idUsuario;
-                    if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
-                    
-                    if (isset($_POST['email'])&&
-                        isset($_POST['pass']))
-                    { 
-                        $user=mysql_entities_fix_string($conexion,get_post($conexion, 'email'));
-                        $password=mysql_entities_fix_string($conexion,get_post($conexion, 'pass'));
-                        $query = "SELECT * FROM usuario WHERE coreUsuario='$user'";
-                        $result = $conexion->query($query);
-                        if (!$result) die ("Usurio no encontrado");
-                        elseif ($result->num_rows)
-                        {
-                            $row = $result->fetch_array(MYSQLI_NUM);
-                            $result->close();
-                            if (password_verify($password, $row[3])){
-                                session_start();
-                                $_SESSION['id']=$_POST['email'];
-                                $_SESSION['pass']=$_POST['pass'];
-                                header('location:diario.php');
-                            }
-                            else die("Usuario/password incorrecto");
-                        }
-                        else die("Usuario/password incorrecto");
-                    }
-                    
-                    $conexion->close();
-                    function mysql_entities_fix_string($conexion, $string)
-                    {
-                        return htmlentities(mysql_fix_string($conexion, $string));
-                    }
-                    function mysql_fix_string($conexion, $string)
-                    {
-                        if (get_magic_quotes_gpc()) $string = stripslashes($string);
-                        return $conexion->real_escape_string($string);
-                    }
-                    function get_post($con, $var)
-                    {
-                        return $con->real_escape_string($_POST[$var]);
-                    }
-                    
-                    
-                    ?>
                </div>
                <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
-                   <a href="index.html" class="text-decoration-none text-light font-weight-bold">Regresar a la página principal</a>
+                   <a href="index.php" class="text-decoration-none text-light font-weight-bold">Regresar a la página principal</a>
                </div>
            </div>
        </div>
@@ -153,8 +169,9 @@
         <p class="">&copy; 2021 Titulo | Todos los derechos reservados</p>  
    </footer>
 -->
+
     
-   <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>

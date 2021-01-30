@@ -1,3 +1,64 @@
+<?php
+require_once 'bd/conexiondatos.php';
+$conexion=new mysqli($host,$user,$password,$database,$port);
+if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+if (isset($_POST['dni'])&&
+    isset($_POST['contraseña']))
+{ 
+    $user=mysql_entities_fix_string($conexion,get_post($conexion, 'dni'));
+    $password=mysql_entities_fix_string($conexion,get_post($conexion, 'contraseña'));
+    $query = "SELECT * FROM usuario WHERE usuarioUsuario='$user'";
+    $result = $conexion->query($query);
+    if (!$result) die ("Usurio no encontrado");
+    elseif ($result->num_rows)
+    {
+        $row = $result->fetch_array(MYSQLI_NUM);
+        $result->close();
+        //if (password_verify($password, $row[2])){
+        if ($password==$row[2]){    
+            session_start();
+            $_SESSION['usuario']=$_POST['dni'];
+            $_SESSION['contraseña']=$_POST['contraseña'];
+            if("administrador"==$row[3]){
+                header('location:administrador.php');
+            }
+            if("delegado"==$row[3]){
+                header('location:delegado.php');
+            }
+            if("final indirecto"==$row[3]){
+                header('location:finalindirecto.php');
+            }
+            if("jurado"==$row[3]){
+                header('location:jurado.php');
+            }
+            if("operario"==$row[3]){
+                header('location:operario.php');
+            }
+        }
+        else die("Usuario/password incorrecto");
+    }
+    else die("Usuario/password incorrecto");
+}
+
+$conexion->close();
+function mysql_entities_fix_string($conexion, $string)
+{
+    return htmlentities(mysql_fix_string($conexion, $string));
+}
+function mysql_fix_string($conexion, $string)
+{
+    if (get_magic_quotes_gpc()) $string = stripslashes($string);
+    return $conexion->real_escape_string($string);
+}
+function get_post($con, $var)
+{
+    return $con->real_escape_string($_POST[$var]);
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
     
@@ -23,8 +84,8 @@
     <!-- NAVEGACIÓN -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
         <div class="container">
-            <a href="index.html" class="navbar-brand">
-                PUKLLAY 2021
+            <a href="index.php" class="navbar-brand">
+                PUKLLAY <?php $idPukllay=2021;echo $idPukllay;?> 
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -95,14 +156,14 @@
                                 <div class="card-body">
                                     <h3>Inicia sesión:</h3>
                                     <p>Si eres delegado de comparsa puedes iniciar sesión y ver tus calificaciones</p>
-                                    <form action="">
+                                    <form action="index.php" method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-lg" placeholder="DNI">
+                                            <input type="text" class="form-control form-control-lg" placeholder="DNI" name="dni">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña">
+                                            <input type="password" class="form-control form-control-lg" placeholder="Contraseña" name="contraseña">
                                         </div>
-                                        <input type="submit" class="btn btn-outline-light btn-block" value="Enviar">
+                                        <input type="submit" class="btn btn-outline-light btn-block" value="Iniciar sesión">
                                     </form>
                                 </div>
                             </div>
@@ -234,12 +295,12 @@
                     </ul>
                 </div>
                 <div class="col-4">
-                    <form action="#" method="" class="">
+                    <form action="index.php" method="post" class="">
                         <label for="usuario">Usuario:</label>
-                        <input type="text" id="usuario" class="form-control"><br>
+                        <input type="text" id="usuario" class="form-control" name="dni"><br>
                         <label for="pass">Contraseña:</label>
-                        <input type="password" id="pass" class="form-control"><br>
-                        <button type="buttom" class="btn btn-primary">INGRESAR</button>
+                        <input type="password" id="pass" class="form-control" name="contraseña"><br>
+                        <div class="text-center"><input type="submit" class="btn btn-primary text-center" value="Iniciar sesión"></div>
                     </form>
                 </div>
             </div>
@@ -261,37 +322,86 @@
                     <div class="row">
                         <div class="col-6">
                             <h4 class="text-success">Delegado de la comparsa:</h4>
-                            <form action="" method="">
-                                <input type="text" class="form-group form-control" placeholder="DNI del delegado de comparsa">
-                                <input type="text" class="form-group form-control" placeholder="Nombres">
-                                <input type="text" class="form-group form-control" placeholder="Apellidos">
-                                <input type="text" class="form-group form-control" placeholder="Correo electrónico">
-                                <input type="text" class="form-group form-control" placeholder="Celular">
+                            <form action="index.php" method="post">
+                                <input type="text" class="form-group form-control" placeholder="DNI del delegado de comparsa" name="dnid">
+                                <input type="text" class="form-group form-control" placeholder="Nombres" name="nombred">
+                                <input type="text" class="form-group form-control" placeholder="Apellidos" name="apellidod">
+                                <input type="text" class="form-group form-control" placeholder="Correo electrónico" name="correod">
+                                <input type="text" class="form-group form-control" placeholder="Celular" name="celulard">
                                 <button class="btn btn-primary">Registrar delegado</button>
                             </form>
                         </div>
                         <div class="col-6">
                             <h4 class="text-success">Registrar comparsa:</h4>
-                            <form action="" method="">
-                                <input type="text" class="form-control form-group" placeholder="Nombre de comparsa">
-                                <input type="text" class="form-control form-group" placeholder="Procedencia">
-                                <input type="text" class="form-control form-group" placeholder="Cantidad de participantes">
-                                <input type="text" class="form-control form-group" placeholder="Categoría">
-                                <input type="text" class="form-control form-group" placeholder="DNI delegado">
+                            <form action="index.php" method="post">
+                                <input type="text" class="form-control form-group" placeholder="Nombre de comparsa" name="nombrec">
+                                <input type="text" class="form-control form-group" placeholder="Procedencia" name="procedencia">
+                                <input type="text" class="form-control form-group" placeholder="Cantidad de participantes" name="cantidad">
+                                <input type="text" class="form-control form-group" placeholder="Categoría" name="categoria">
+                                <input type="text" class="form-control form-group" placeholder="DNI delegado" name="dnic">
                                 <button class="btn btn-primary">Registrar comparsa</button>
                             </form>
                         </div>
                     </div>
                 </div>
+
+                <?php
+                $conexion=new mysqli($host,$user,$password,$database,$port);
+                if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+                
+                if (isset($_POST['dnid']) &&
+                    isset($_POST['nombred']) &&
+                    isset($_POST['apellidod']) &&
+                    isset($_POST['correod']) &&
+                    isset($_POST['celulard']))
+                {
+                    $dnid = get_post($conexion, 'dnid');
+                    $nombred = get_post($conexion, 'nombred');
+                    $apellidod = get_post($conexion, 'apellidod');
+                    $correod = get_post($conexion, 'correod');
+                    $celulard = get_post($conexion, 'celulard');
+                    $pass = get_post($conexion, 'dnid');;//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
+                    $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$dnid', '$pass', 'delegado','activo')";
+                    $result = $conexion->query($query);
+                    if (!$result) echo "INSERT falló <br><br>";
+                    $query = "INSERT INTO delegado (dniDele,nombDele, apelDele,celuDele,coreDele,usuario_idPukllay,usuario_usuarioUsuario) VALUES ('$dnid', '$nombred', '$apellidod','$celulard','$correod','$idPukllay','$dnid')";
+                    $result = $conexion->query($query);
+                    if (!$result) echo "INSERT falló <br><br>";
+                }
+
+                if (isset($_POST['nombrec']) &&
+                    isset($_POST['procedencia']) &&
+                    isset($_POST['cantidad']) &&
+                    isset($_POST['categoria']) &&
+                    isset($_POST['dnic']))
+                {
+                    $nombrec = get_post($conexion, 'nombrec');
+                    $procedencia = get_post($conexion, 'procedencia');
+                    $cantidad = get_post($conexion, 'cantidad');
+                    $categoria = get_post($conexion, 'categoria');
+                    $dnic = get_post($conexion, 'dnic');
+                    $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoría,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
+                    $result = $conexion->query($query);
+                    if (!$result) echo "INSERT falló <br><br>";
+                }
+                
+            
+                $conexion->close();
+               
+             
+                
+                
+                ?>
+
                 <div class="col-4">
                     <div class="card bg-success">
                         <div class="card-body">
                             <h5 class="text-center">Inicia sesión</h5>
                             <p class="text-center">Revise su correo electrónico para iniciar sesión</p>
-                            <form action="" method="">
-                                <input type="text" class="form-control form-group" placeholder="DNI">
-                                <input type="text" class="form-control form-group" placeholder="Contraseña">
-                                <div class="text-center"><button class="btn btn-primary text-center">Ingresar</button>
+                            <form action="index.php" method="post">
+                                <input type="text" class="form-control form-group" placeholder="DNI" name="dni">
+                                <input type="password" class="form-control form-group" placeholder="Contraseña" name="contraseña">
+                                <div class="text-center"><input type="submit" class="btn btn-primary text-center" value="Iniciar sesión">
                                 </div>
 
 
