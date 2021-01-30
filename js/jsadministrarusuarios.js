@@ -24,13 +24,40 @@ $(document).ready(function(){
         }
     });
     
+$('#listaPuk').on('change', function(){
+    tabla.clear();
+    id = $('#listaPuk').val();
+    opcion = 4; //editar
+    $.ajax({
+        url: "bd/crudadministrarusuarios.php",
+        type: "POST",
+        dataType: "json",
+        data: {idPukllay:id,opcion:opcion},
+        success: function(data){ 
+            //var datos=JSON.parse(data); 
+            console.log(data);
+            data.forEach(dat => {
+                id = dat['idPukllay'];            
+                usuario = dat['usuarioUsuario'];
+                password = dat['paswUsuario'];
+                tipo = dat['tipoUsuario'];
+                estado = dat['estadoUsuario'];
+                if(opcion == 4){
+                    tabla.row.add([id,usuario,password,tipo,estado]).draw();
+                }    
+            });                 
+        }        
+    });
+       
+});
+
 $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
     $(".modal-title").text("Nuevo usuario");            
     $("#modal").modal("show");        
-    id=2021;
+    id=$('#listaPuk').val();
     opcion = 1; //insertar
 });    
     
@@ -39,7 +66,7 @@ var fila; //capturar la fila para editar o borrar el registro
 //botón EDITAR    
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
-    id=2021;
+    id=$('#listaPuk').val();
     usuario = fila.find('td:eq(1)').text();
     password = fila.find('td:eq(2)').text();
     tipo = fila.find('td:eq(3)').text();
@@ -53,7 +80,7 @@ $(document).on("click", ".btnEditar", function(){
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar Persona");            
+    $(".modal-title").text("Editar usuario");            
     $("#modal").modal("show");  
     
 });
@@ -61,7 +88,7 @@ $(document).on("click", ".btnEditar", function(){
 //botón BORRAR
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
-    id=2021;
+    id=$('#listaPuk').val();
     usuario = $(this).closest("tr").find('td:eq(1)').text();
     opcion = 3 //borrar
     var respuesta = confirm("¿Está seguro de eliminar el registro: "+usuario+"?");
@@ -97,7 +124,10 @@ $("#formModal").submit(function(e){
             password = data[0].paswUsuario;
             tipo = data[0].tipoUsuario;
             estado = data[0].estadoUsuario;
-            if(opcion == 1){tabla.row.add([id,usuario,password,tipo,estado]).draw();}else{tabla.row(fila).data([id,usuario,password,tipo,estado]).draw();}            
+            if(opcion == 1){
+                tabla.row.add([id,usuario,password,tipo,estado]).draw();}
+            if(opcion == 2){
+                tabla.row(fila).data([id,usuario,password,tipo,estado]).draw();}               
         }        
     });
     $("#modal").modal("hide");    
