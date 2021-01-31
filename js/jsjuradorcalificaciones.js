@@ -59,16 +59,16 @@ $('#listaPuk').on('change', function(){
         url: "bd/crudjuradorcalificaciones.php",
         type: "POST",
         dataType: "json",
-        data: {opcion:opcion},
+        data: {opcion:opcion,etapa_fechaDia:etapa_fechaDia},
         success: function(data){ 
             //var datos=JSON.parse(data); 
             console.log(data);
             data.forEach(dat => {
                 comparsa_idComparsa = dat['idComparsa'];            
                 nombreComp = dat['nombreComp'];
-                puntajeCalificacion = "";
-                descripcionCalificacion = "";
-                lugarCalificacion = "";
+                puntajeCalificacion = dat['puntajeCalificacion'];
+                descripcionCalificacion = dat['descripcionCalificacion'];
+                lugarCalificacion = dat['lugarCalificacion'];
                 if(opcion == 4){
                     tabla.row.add([comparsa_idComparsa,nombreComp,puntajeCalificacion,descripcionCalificacion,lugarCalificacion]).draw();
                 }    
@@ -119,20 +119,26 @@ $(document).on("click", ".btnEditar", function(){
 
 //botón BORRAR
 $(document).on("click", ".btnBorrar", function(){    
-    fila = $(this);
+    fila = $(this).closest("tr");
     etapa_fechaDia=$('#listaPuk').val();
-    comparsa_idComparsa = $(this).closest("tr").find('td:eq(0)').text();
-    lugarCalificacion = $(this).closest("tr").find('td:eq(4)').text();
+    comparsa_idComparsa = fila.find('td:eq(0)').text();
+    lugarCalificacion = fila.find('td:eq(4)').text();
     opcion = 3 //borrar
-    var respuesta = confirm("¿Está seguro de eliminar la calificación de la comparsa: "+idComparsa+"?");
+    var respuesta = confirm("¿Está seguro de eliminar la calificación de la comparsa: "+comparsa_idComparsa+"?");
     if(respuesta){
         $.ajax({
             url: "bd/crudjuradorcalificaciones.php",
             type: "POST",
             dataType: "json",
             data: {opcion:opcion, etapa_fechaDia:etapa_fechaDia, comparsa_idComparsa:comparsa_idComparsa,lugarCalificacion:lugarCalificacion},
-            success: function(){
-                tabla.row(fila.parents('tr')).remove().draw();
+            success: function(data){
+                console.log(data);
+                comparsa_idComparsa = data[0].idComparsa;            
+                nombreComp = data[0].nombreComp;
+                puntajeCalificacion = "";
+                descripcionCalificacion = "";
+                lugarCalificacion = "";
+                tabla.row(fila).data([comparsa_idComparsa,nombreComp,puntajeCalificacion,descripcionCalificacion,lugarCalificacion]).draw();
             }
         });
     }   

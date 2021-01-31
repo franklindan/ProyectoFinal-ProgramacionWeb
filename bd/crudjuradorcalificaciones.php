@@ -59,14 +59,20 @@ switch($opcion){
         $consulta = "DELETE FROM calificacion WHERE dniJurado='$dniJurado' and comparsa_idComparsa='$comparsa_idComparsa' and lugarCalificacion='$lugarCalificacion' and etapa_fechaDia='$etapa_fechaDia'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
-        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
-        break;   
-    case 4: 
-        $consulta = "SELECT * FROM comparsa";
+
+        $consulta = "select idComparsa,nombreComp,puntajeCalificacion,descripcionCalificacion,
+        lugarCalificacion from comparsa left join calificacion on idComparsa=comparsa_idComparsa and etapa_fechaDia='$etapa_fechaDia' where idComparsa='$comparsa_idComparsa'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
-        break;            
+        break;   
+    case 4: 
+        $consulta = "select idComparsa,nombreComp,puntajeCalificacion,descripcionCalificacion,
+        lugarCalificacion from comparsa left join calificacion on idComparsa=comparsa_idComparsa and etapa_fechaDia='$etapa_fechaDia'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        break;             
 }
 print json_encode($data, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
 $conexion = NULL;
