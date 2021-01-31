@@ -60,9 +60,9 @@
                             Delegado
                         </a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Inicio</a>
-                                <a href="#" class="dropdown-item">Cuenta</a>
-                                <a href="#" class="dropdown-item">Cerrar sesión</a>
+                                <a href="delegado.php" class="dropdown-item">Inicio</a>
+                                <a href="delegadocuenta.php" class="dropdown-item">Cuenta</a>
+                                <a href="bd/cerrarsesion.php" class="dropdown-item">Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>
@@ -101,25 +101,26 @@
                                             $conexion=new mysqli($host,$user,$password,$database,$port);
                                             if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
 
-                                            $query = "SELECT * FROM comparsa where delegado_dniDele='$_SESSION['usuario']'";
-                                            $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos");
-                                            $row = $result->fetch_array(MYSQLI_NUM);
-                                            $idComparsa = $row[0];
-
-                                            $query = "SELECT * FROM participante where idComparsa='$idComparsa'";
+                                            $dniDelegado=$_SESSION['usuario'];    
+                                            $query = "SELECT * FROM comparsa where delegado_dniDele='$dniDelegado'";
                                             $result = $conexion->query($query);
                                             if (!$result) die ("Falló el acceso a la base de datos");
                                             
-                                            $data = $result->fetch_array(FETCH_ASSOC);
-                                            foreach($data as $dat) {
+                                            $row = $result->fetch_array(MYSQLI_NUM);
+                                            $idComparsa = $row[0];
+
+                                            $query = "SELECT * FROM participante where comparsa_idComparsa='$idComparsa'";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            
+                                            while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $dat['dniPart'] ?></td>
-                                                <td><?php echo $dat['nombPart'] ?></td>
-                                                <td><?php echo $dat['apelPart'] ?></td>
-                                                <td><?php echo $dat['celuPart'] ?></td> 
-                                                <td><?php echo $dat['corePart'] ?></td>     
+                                                <td><?php echo $data['dniPart'] ?></td>
+                                                <td><?php echo $data['nombPart'] ?></td>
+                                                <td><?php echo $data['apelPart'] ?></td>
+                                                <td><?php echo $data['celuPart'] ?></td> 
+                                                <td><?php echo $data['corePart'] ?></td>     
                                                 <td></td>
                                             </tr>
                                             <?php
@@ -146,6 +147,10 @@
                             </div>
                         <form id="formModal" method="post">    
                             <div class="modal-body">
+                                <div class="form-group">
+                                <label for="dni" class="col-form-label">Dni:</label>
+                                <input type="text" class="form-control" id="dni">
+                                </div>            
                                 <div class="form-group">
                                 <label for="nombre" class="col-form-label">Nombre:</label>
                                 <input type="text" class="form-control" id="nombre">

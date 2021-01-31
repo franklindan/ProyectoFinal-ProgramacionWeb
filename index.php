@@ -397,7 +397,7 @@ function get_post($con, $var)
                     <div class="card bg-success">
                         <div class="card-body">
                             <h5 class="text-center">Inicia sesión</h5>
-                            <p class="text-center">Revise su correo electrónico para iniciar sesión</p>
+                            <p class="text-center">Revise su correo electrónico para iniciar sesión o ingrese su dni como contraseña</p>
                             <form action="index.php" method="post">
                                 <input type="text" class="form-control form-group" placeholder="DNI" name="dni">
                                 <input type="password" class="form-control form-group" placeholder="Contraseña" name="contraseña">

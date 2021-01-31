@@ -20,6 +20,17 @@
 </head>
 
 <body>
+
+    <?php
+    
+    session_start();
+    if (!isset($_SESSION['usuario']))
+    {
+        header("location:login.php");   
+    }
+
+    ?>
+
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo">
@@ -47,9 +58,9 @@
                             Final indirecto
                         </a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Inicio</a>
-                                <a href="#" class="dropdown-item">Cuenta</a>
-                                <a href="#" class="dropdown-item">Cerrar sesión</a>
+                                <a href="finalindirecto.php" class="dropdown-item">Inicio</a>
+                                <a href="finalindirectocuenta.php" class="dropdown-item">Cuenta</a>
+                                <a href="bd/cerrarsesion.php" class="dropdown-item">Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>

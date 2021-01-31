@@ -20,28 +20,43 @@
 </head>
 
 <body>
+
+    <?php
+    
+    session_start();
+    if (!isset($_SESSION['usuario']))
+    {
+        header("location:login.php");   
+    }
+
+    ?>
+
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo">
                 <h4 class="text-light font-weight-bold">Pukllay 2021 | Operario</h4>
             </div>
             <div class="menu">
-                <a href="operario.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
-                <a href="#" class="d-block p-3 text-light dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon ion-md-add mr-2 lead"></i>Registrar pukllay
-                </a>
-                    <div class="dropdown-menu">
-                        <a href="operarioprpukllay.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar nuevo pukllay</a>
-                        <a href="operarioprorganizadores.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar organizadores</a>
-                        <a href="operarioprauspiciadores.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar auspiciadores</a>
-                        <a href="operariopretapas.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar etapas</a>
-                        <a href="operarioprgastos.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar gastos</a>
-                        <a href="operarioprpremios.php" class="d-block p-3 text-dark"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar premios</a>
-                    </div>
-                <a href="operariorjurados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar jurados</a>
-                <a href="operariordelegados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar delegados</a>
-                <a href="operariorcomparsas.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar comparsas</a>
-                <a href="operariorparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
+                <ul class="navbar navbar-inverse">
+                    <li><a href="operario.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#a" class="d-block p-3 text-light dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon ion-md-add mr-2 lead"></i>Registrar pukllay
+                        </a>
+                        <ul class="dropdown-menu animated fadeInLeft" role="menu">
+                            <li><a href="operarioprpukllay.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar nuevo pukllay</a></li>
+                            <li><a href="operarioprorganizadores.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar organizadores</a></li>
+                            <li><a href="operarioprauspiciadores.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar auspiciadores</a></li>
+                            <li><a href="operariopretapas.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar etapas</a></li>
+                            <li><a href="operarioprgastos.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar gastos</a></li>
+                            <li><a href="operarioprpremios.php" class="d-block p-3 text-dark dropdown-item"><i class="icon ion-md-add-circle mr-2 lead"></i>Registrar premios</a></li>
+                        </ul>  
+                    </li>    
+                    <li><a href="operariorjurados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar jurados</a></li>
+                    <li><a href="operariordelegados.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar delegados</a></li>
+                    <li><a href="operariorcomparsas.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar comparsas</a></li>
+                    <li><a href="operariorparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a></li> 
+                </ul>
             </div>
         </div>
         <div class="w-100">
@@ -59,9 +74,9 @@
                             Operario
                         </a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Inicio</a>
-                                <a href="#" class="dropdown-item">Cuenta</a>
-                                <a href="#" class="dropdown-item">Cerrar sesión</a>
+                                <a href="operario.php" class="dropdown-item">Inicio</a>
+                                <a href="operariocuenta.php" class="dropdown-item">Cuenta</a>
+                                <a href="bd/cerrarsesion.php" class="dropdown-item">Cerrar sesión</a>
                             </div>
                         </li>
                     </ul>
@@ -95,12 +110,11 @@
    </footer>
 -->
 
-
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
     <script src="js/jsadministrarusuarios.js"></script>
-    
+
 </body>
 </html>

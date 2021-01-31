@@ -28,9 +28,8 @@ $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo usuario");            
+    $(".modal-title").text("Nuevo participante");            
     $("#modal").modal("show");        
-    id=$('#listaPuk').val();
     opcion = 1; //insertar
 });    
     
@@ -39,21 +38,22 @@ var fila; //capturar la fila para editar o borrar el registro
 //botón EDITAR    
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
-    id=$('#listaPuk').val();
-    usuario = fila.find('td:eq(1)').text();
-    password = fila.find('td:eq(2)').text();
-    tipo = fila.find('td:eq(3)').text();
-    estado = fila.find('td:eq(4)').text();
+    dni = fila.find('td:eq(0)').text();
+    nombre = fila.find('td:eq(1)').text();
+    apellido = fila.find('td:eq(2)').text();
+    celular = fila.find('td:eq(3)').text();
+    correo = fila.find('td:eq(4)').text();
     
-    $("#usuario").val(usuario);
-    $("#password").val(password);
-    $("#tipo").val(tipo);
-    $("#estado").val(estado);
+    $("#dni").val(dni);
+    $("#nombre").val(nombre);
+    $("#apellido").val(apellido);
+    $("#celular").val(celular);
+    $("#correo").val(correo);
     opcion = 2; //editar
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar usuario");            
+    $(".modal-title").text("Editar participante");            
     $("#modal").modal("show");  
     
 });
@@ -61,16 +61,15 @@ $(document).on("click", ".btnEditar", function(){
 //botón BORRAR
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
-    id=$('#listaPuk').val();
-    usuario = $(this).closest("tr").find('td:eq(1)').text();
+    dni = $(this).closest("tr").find('td:eq(0)').text();
     opcion = 3 //borrar
-    var respuesta = confirm("¿Está seguro de eliminar el registro: "+usuario+"?");
+    var respuesta = confirm("¿Está seguro de eliminar el registro: "+dni+"?");
     if(respuesta){
         $.ajax({
             url: "bd/cruddregistrarparticipantes.php",
             type: "POST",
             dataType: "json",
-            data: {opcion:opcion, usuarioUsuario:usuario},
+            data: {opcion:opcion, dniPart:dni},
             success: function(){
                 tabla.row(fila.parents('tr')).remove().draw();
             }
@@ -80,27 +79,28 @@ $(document).on("click", ".btnBorrar", function(){
     
 $("#formModal").submit(function(e){
     e.preventDefault();    
-    usuario = $.trim($("#usuario").val());
-    password = $.trim($("#password").val());
-    tipo = $.trim($("#tipo").val());
-    estado = $.trim($("#estado").val());
+    dni = $.trim($("#dni").val());
+    nombre = $.trim($("#nombre").val());
+    apellido = $.trim($("#apellido").val());
+    celular = $.trim($("#celular").val());
+    correo = $.trim($("#correo").val());
     $.ajax({
         url: "bd/cruddregistrarparticipantes.php",
         type: "POST",
         dataType: "json",
-        data: {idPukllay:id,usuarioUsuario:usuario,paswUsuario:password,tipoUsuario:tipo,estadoUsuario:estado,opcion:opcion},
+        data: {dniPart:dni,nombPart:nombre,apelPart:apellido,celuPart:celular,corePart:correo,opcion:opcion},
         success: function(data){ 
             //var datos=JSON.parse(data);
             console.log(data);
-            id = data[0].idPukllay;            
-            usuario = data[0].usuarioUsuario;
-            password = data[0].paswUsuario;
-            tipo = data[0].tipoUsuario;
-            estado = data[0].estadoUsuario;
+            dni = data[0].dniPart;            
+            nombre = data[0].nombPart;
+            apellido = data[0].apelPart;
+            celular = data[0].celuPart;
+            correo = data[0].corePart;
             if(opcion == 1){
-                tabla.row.add([id,usuario,password,tipo,estado]).draw();}
+                tabla.row.add([dni,nombre,apellido,celular,correo]).draw();}
             if(opcion == 2){
-                tabla.row(fila).data([id,usuario,password,tipo,estado]).draw();}               
+                tabla.row(fila).data([dni,nombre,apellido,celular,correo]).draw();}               
         }        
     });
     $("#modal").modal("hide");    
