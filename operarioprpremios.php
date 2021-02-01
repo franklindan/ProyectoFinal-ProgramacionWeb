@@ -86,7 +86,101 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                
+
+                <section>
+                    <div class="container">
+                        <h1 class="font-weight-bold mb-0 py-2">Registrar premios del Pukllay</h1>
+                        <div class="pb-3">
+                            <button id="btnNuevo" type="button" class="btn btn-success">Nuevo premio</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <td>Id</td>
+                                                <td>Nombre</td>
+                                                <td>Tipo</td>
+                                                <td>Puesto</td>
+                                                <td>Descripción</td>
+                                                <td>Acciones</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require_once 'bd/conexiondatos.php';
+                                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+                                            $idPukllay=$_SESSION['idPukllay'];    
+
+                                            $query = "SELECT * FROM premio where pukllay_idPukllay='$idPukllay'";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            
+                                            while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $data['idPremio'] ?></td>
+                                                <td><?php echo $data['nombrePremio'] ?></td>
+                                                <td><?php echo $data['tipoPremio'] ?></td>
+                                                <td><?php echo $data['puestoPremio'] ?></td>
+                                                <td><?php echo $data['descripcionPremio'] ?></td>
+                                                <td></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            $result->close();
+                                            $conexion->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--Modal-->
+                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="tituloModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloModal"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="formModal" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group etapaH">
+                                        <label for="nombrePremio" class="col-form-label">Nombre premio:</label>
+                                        <input type="text" class="form-control" id="nombrePremio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tipoPremio" class="col-form-label">Tipo de premio:</label>
+                                        <input type="text" class="form-control" id="tipoPremio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="puestoPremio" class="col-form-label">Puesto otorgado:</label>
+                                        <input type="text" class="form-control" id="puestoPremio">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="descripcionPremio" class="col-form-label">Descripción del premio:</label>
+                                        <input type="text" class="form-control" id="descripcionPremio">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="btnBorrar" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
         </div>
@@ -107,7 +201,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jsoperarioprpremios.js"></script>
     
 </body>
 </html>
