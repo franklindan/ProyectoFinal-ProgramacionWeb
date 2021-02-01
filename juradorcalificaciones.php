@@ -70,7 +70,7 @@
             <!--Contenido-->
             <div class="" id="content">
                 
-            <section>
+                <section>
                     <div class="container">
                         <h1 class="font-weight-bold mb-0 py-2">Registrar calificaciones</h1>
                         <div class="row pb-2">
@@ -82,13 +82,13 @@
                                     $objeto = new Conexion();
                                     $conexion = $objeto->Conectar();
 
-                                    $consulta = "SELECT fechaDia FROM etapa";
+                                    $consulta = "SELECT * FROM etapa";
                                     $resultado = $conexion->prepare($consulta);
                                     $resultado->execute();
                                     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
                                     foreach($data as $dat) {
                                     ?>    
-                                    <option value="<?php echo $dat['fechaDia'] ?>"><?php echo $dat['fechaDia'] ?></option>
+                                    <option value="<?php echo $dat['fechaDia'] ?>"><?php echo $dat['nombreDia'] ?></option>
                                     <?php
                                     }
                                     $resultado = NULL;

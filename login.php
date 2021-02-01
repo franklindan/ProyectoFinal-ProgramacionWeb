@@ -20,19 +20,22 @@
                 session_start();
                 $_SESSION['usuario']=$_POST['dni'];
                 $_SESSION['contraseña']=$_POST['contraseña'];
-                if("administrador"==$row[3]){
+                $_SESSION['idPukllay']=$row[0];
+                $_SESSION['tipo']=$row[3];
+                $_SESSION['estado']=$row[4];
+                if("administrador"==$row[3] and "activo"==$row[4]){
                     header('location:administrador.php');
                 }
-                if("delegado"==$row[3]){
+                if("delegado"==$row[3] and "activo"==$row[4]){
                     header('location:delegado.php');
                 }
-                if("final indirecto"==$row[3]){
+                if("final indirecto"==$row[3] and "activo"==$row[4]){
                     header('location:finalindirecto.php');
                 }
-                if("jurado"==$row[3]){
+                if("jurado"==$row[3] and "activo"==$row[4]){
                     header('location:jurado.php');
                 }
-                if("operario"==$row[3]){
+                if("operario"==$row[3] and "activo"==$row[4]){
                     header('location:operario.php');
                 }
             }
