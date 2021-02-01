@@ -89,9 +89,9 @@
 
                 <section>
                     <div class="container">
-                        <h1 class="font-weight-bold mb-0 py-2">Registrar etapas</h1>
+                        <h1 class="font-weight-bold mb-0 py-2">Registrar gastos del Pukllay</h1>
                         <div class="pb-3">
-                            <button id="btnNuevo" type="button" class="btn btn-success">Nueva etapa</button>
+                            <button id="btnNuevo" type="button" class="btn btn-success">Nuevo gasto</button>
                         </div>
                     </div>
                     <div class="container">
@@ -101,12 +101,11 @@
                                     <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
                                         <thead class="text-center">
                                             <tr>
-                                                <td>Fecha etapa</td>
+                                                <td>Id</td>
                                                 <td>Nombre</td>
+                                                <td>Cantidad</td>
                                                 <td>Descripción</td>
-                                                <td>Lugar</td>
-                                                <td>Hora inicio</td>
-                                                <td>Hora fin</td>
+                                                <td>Fecha</td>
                                                 <td>Acciones</td>
                                             </tr>
                                         </thead>
@@ -118,19 +117,18 @@
 
                                             $idPukllay=$_SESSION['idPukllay'];    
 
-                                            $query = "SELECT * FROM etapa where idPukllay='$idPukllay'";
+                                            $query = "SELECT * FROM gastopukllay where pukllay_idPukllay='$idPukllay'";
                                             $result = $conexion->query($query);
                                             if (!$result) die ("Falló el acceso a la base de datos");
                                             
                                             while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $data['fechaDia'] ?></td>
-                                                <td><?php echo $data['nombreDia'] ?></td>
-                                                <td><?php echo $data['descripcionDia'] ?></td>
-                                                <td><?php echo $data['lugarDia'] ?></td>
-                                                <td><?php echo $data['horaIniDia'] ?></td>
-                                                <td><?php echo $data['horaFinDia'] ?></td>
+                                                <td><?php echo $data['idGasto'] ?></td>
+                                                <td><?php echo $data['nombreGasto'] ?></td>
+                                                <td><?php echo $data['cantidadGasto'] ?></td>
+                                                <td><?php echo $data['descripcionGasto'] ?></td>
+                                                <td><?php echo $data['fechaGasto'] ?></td>
                                                 <td></td>
                                             </tr>
                                             <?php
@@ -158,28 +156,20 @@
                             <form id="formModal" method="post">
                                 <div class="modal-body">
                                     <div class="form-group etapaH">
-                                        <label for="fechaDia" class="col-form-label">Fecha etapa:</label>
-                                        <input type="text" class="form-control" id="fechaDia">
+                                        <label for="nombreGasto" class="col-form-label">Nombre gasto:</label>
+                                        <input type="text" class="form-control" id="nombreGasto">
                                     </div>
                                     <div class="form-group">
-                                        <label for="nombreDia" class="col-form-label">Nombre etapa:</label>
-                                        <input type="text" class="form-control" id="nombreDia">
+                                        <label for="cantidadGasto" class="col-form-label">Cantidad gasto:</label>
+                                        <input type="text" class="form-control" id="cantidadGasto">
                                     </div>
                                     <div class="form-group">
-                                        <label for="descripcionDia" class="col-form-label">Descripción:</label>
-                                        <input type="text" class="form-control" id="descripcionDia">
+                                        <label for="descripcionGasto" class="col-form-label">Descripción:</label>
+                                        <input type="text" class="form-control" id="descripcionGasto">
                                     </div>
                                     <div class="form-group">
-                                        <label for="lugarDia" class="col-form-label">Lugar:</label>
-                                        <input type="text" class="form-control" id="lugarDia">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="horaIniDia" class="col-form-label">Hora de incio:</label>
-                                        <input type="text" class="form-control" id="horaIniDia">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="horaFinDia" class="col-form-label">Hora fin:</label>
-                                        <input type="text" class="form-control" id="horaFinDia">
+                                        <label for="fechaGasto" class="col-form-label">Fecha de gasto:</label>
+                                        <input type="text" class="form-control" id="fechaGasto">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -211,7 +201,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jsoperarioprgastos.js"></script>
     
 </body>
 </html>
