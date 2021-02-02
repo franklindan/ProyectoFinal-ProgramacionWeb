@@ -28,10 +28,10 @@ $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo jurado");  
+    $(".modal-title").text("Nueva comparsa");  
     $(".dniH").css("display", "block");          
     $("#modal").modal("show");     
-    //idPremio=null;   
+    idComparsa=null;   
     opcion = 1; //insertar
 });    
     
@@ -40,22 +40,25 @@ var fila; //capturar la fila para editar o borrar el registro
 //botón EDITAR    
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
-    dniJurado = fila.find('td:eq(0)').text();
-    nombJurado = fila.find('td:eq(1)').text();
-    apelJurado = fila.find('td:eq(2)').text();
-    coreJurado = fila.find('td:eq(3)').text();
-    estadoUsuario = fila.find('td:eq(4)').text();
-    
-    $("#dniJurado").val(dniJurado);
-    $("#nombJurado").val(nombJurado);
-    $("#apelJurado").val(apelJurado);
-    $("#coreJurado").val(coreJurado);
-    $("#estadoUsuario").val(estadoUsuario);
+    idComparsa = fila.find('td:eq(0)').text();
+    nombreComp = fila.find('td:eq(1)').text();
+    Procedencia = fila.find('td:eq(2)').text();
+    Categoría = fila.find('td:eq(3)').text();
+    CantidadPart = fila.find('td:eq(4)').text();
+    Financiamiento = fila.find('td:eq(5)').text();
+    delegado_dniDele = fila.find('td:eq(6)').text();
+
+    $("#nombreComp").val(nombreComp);
+    $("#Procedencia").val(Procedencia);
+    $("#Categoría").val(Categoría);
+    $("#CantidadPart").val(CantidadPart);
+    $("#Financiamiento").val(Financiamiento);
+    $("#delegado_dniDele").val(delegado_dniDele);
     opcion = 2; //editar
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar jurado");   
+    $(".modal-title").text("Editar comparsa");   
     $(".dniH").css("display", "none");         
     $("#modal").modal("show");  
     
@@ -64,15 +67,15 @@ $(document).on("click", ".btnEditar", function(){
 //botón BORRAR
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
-    dniJurado = $(this).closest("tr").find('td:eq(0)').text();
-    opcion = 3 //borrar
-    var respuesta = confirm("¿Está seguro de eliminar el registro de dni: "+dniJurado+"?");
+    idComparsa = $(this).closest("tr").find('td:eq(0)').text();
+    opcion = 3; //borrar
+    var respuesta = confirm("¿Está seguro de eliminar el registro de id: "+idComparsa+"?");
     if(respuesta){
         $.ajax({
-            url: "bd/crudoperariorjurados.php",
+            url: "bd/crudoperariorcomparsas.php",
             type: "POST",
             dataType: "json",
-            data: {opcion:opcion, dniJurado:dniJurado},
+            data: {opcion:opcion, idComparsa:idComparsa},
             success: function(){
                 tabla.row(fila.parents('tr')).remove().draw();
             }
@@ -82,28 +85,31 @@ $(document).on("click", ".btnBorrar", function(){
     
 $("#formModal").submit(function(e){
     e.preventDefault();    
-    dniJurado = $.trim($("#dniJurado").val());
-    nombJurado = $.trim($("#nombJurado").val());
-    apelJurado = $.trim($("#apelJurado").val());
-    coreJurado = $.trim($("#coreJurado").val());
-    estadoUsuario = $.trim($("#estadoUsuario").val());
+    nombreComp = $.trim($("#nombreComp").val());
+    Procedencia = $.trim($("#Procedencia").val());
+    Categoría = $.trim($("#Categoría").val());
+    CantidadPart = $.trim($("#CantidadPart").val());
+    Financiamiento = $.trim($("#Financiamiento").val());
+    delegado_dniDele = $.trim($("#delegado_dniDele").val());
     $.ajax({
-        url: "bd/crudoperariorjurados.php",
+        url: "bd/crudoperariorcomparsas.php",
         type: "POST",
         dataType: "json",
-        data: {dniJurado:dniJurado,nombJurado:nombJurado,apelJurado:apelJurado,coreJurado:coreJurado,estadoUsuario:estadoUsuario,opcion:opcion},
+        data: {idComparsa:idComparsa,nombreComp:nombreComp,Procedencia:Procedencia,Categoría:Categoría,CantidadPart:CantidadPart,Financiamiento:Financiamiento,delegado_dniDele:delegado_dniDele,opcion:opcion},
         success: function(data){ 
             //var datos=JSON.parse(data);
             console.log(data);
-            dniJurado = data[0].dniJurado;            
-            nombJurado = data[0].nombJurado;
-            coreJurado = data[0].coreJurado;
-            estadoUsuario = data[0].estadoUsuario;
-            apelJurado = data[0].apelJurado;
+            idComparsa = data[0].idComparsa;   
+            nombreComp = data[0].nombreComp;         
+            Procedencia = data[0].Procedencia;
+            Categoría = data[0].Categoría;
+            CantidadPart = data[0].CantidadPart;
+            Financiamiento = data[0].Financiamiento;
+            delegado_dniDele = data[0].delegado_dniDele;
             if(opcion == 1){
-                tabla.row.add([dniJurado,nombJurado,apelJurado,coreJurado,estadoUsuario]).draw();}
+                tabla.row.add([idComparsa,nombreComp,Procedencia,Categoría,CantidadPart,Financiamiento,delegado_dniDele]).draw();}
             if(opcion == 2){
-                tabla.row(fila).data([dniJurado,nombJurado,apelJurado,coreJurado,estadoUsuario]).draw();}               
+                tabla.row(fila).data([idComparsa,nombreComp,Procedencia,Categoría,CantidadPart,Financiamiento,delegado_dniDele]).draw();}               
         }        
     });
     $("#modal").modal("hide");    

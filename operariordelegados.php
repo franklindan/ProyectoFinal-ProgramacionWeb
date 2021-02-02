@@ -86,7 +86,105 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                
+
+                <section>
+                    <div class="container">
+                        <h1 class="font-weight-bold mb-0 py-2">Registrar delegados</h1>
+                        <div class="pb-3">
+                            <button id="btnNuevo" type="button" class="btn btn-success">Nuevo delegado</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <td>Dni</td>
+                                                <td>Nombre</td>
+                                                <td>Apellido</td>
+                                                <td>Correo</td>
+                                                <td>Estado</td>
+                                                <td>Acciones</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require_once 'bd/conexiondatos.php';
+                                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+                                            $idPukllay=$_SESSION['idPukllay'];    
+
+                                            $query = "SELECT * FROM delegado inner join usuario on usuario_usuarioUsuario=usuarioUsuario where usuario_idPukllay='$idPukllay'";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            
+                                            while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $data['dniDele'] ?></td>
+                                                <td><?php echo $data['nombDele'] ?></td>
+                                                <td><?php echo $data['apelDele'] ?></td>
+                                                <td><?php echo $data['coreDele'] ?></td>
+                                                <td><?php echo $data['estadoUsuario'] ?></td>
+                                                <td></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            $result->close();
+                                            $conexion->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!--Modal-->
+                <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="tituloModal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloModal"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="formModal" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group dniH">
+                                        <label for="dniDele" class="col-form-label">Dni del delegado:</label>
+                                        <input type="text" class="form-control" id="dniDele">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nombDele" class="col-form-label">Nombre del delegado:</label>
+                                        <input type="text" class="form-control" id="nombDele">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="apelDele" class="col-form-label">Apellido del delegado:</label>
+                                        <input type="text" class="form-control" id="apelDele">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="coreDele" class="col-form-label">Correo del delegado:</label>
+                                        <input type="text" class="form-control" id="coreDele">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="estadoUsuario" class="col-form-label">Estado de cuenta del jurado:</label>
+                                        <input type="text" class="form-control" id="estadoUsuario">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="btnBorrar" class="btn btn-dark" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" id="btnGuardar" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
         </div>
@@ -107,7 +205,7 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jsoperariordelegados.js"></script>
     
 </body>
 </html>
