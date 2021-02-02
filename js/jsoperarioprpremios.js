@@ -64,7 +64,7 @@ $(document).on("click", ".btnEditar", function(){
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
     idPremio = $(this).closest("tr").find('td:eq(0)').text();
-    opcion = 3 //borrar
+    opcion = 3; //borrar
     var respuesta = confirm("¿Está seguro de eliminar el registro de id: "+idPremio+"?");
     if(respuesta){
         $.ajax({

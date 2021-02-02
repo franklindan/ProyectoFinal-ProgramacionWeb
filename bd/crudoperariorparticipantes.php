@@ -1,26 +1,12 @@
 <?php
-   
+
 session_start();
 if (!isset($_SESSION['usuario']))
 {
     header("location:login.php");   
 }
 
-require_once 'conexiondatos.php';
-$conexion=new mysqli($host,$user,$password,$database,$port);
-if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
-
-$dniDelegado=$_SESSION['usuario'];    
-$query = "SELECT * FROM comparsa where delegado_dniDele='$dniDelegado'";
-$result = $conexion->query($query);
-if (!$result) die ("Falló el acceso a la base de datos");
-
-$row = $result->fetch_array(MYSQLI_NUM);
-$idComparsa = $row[0];
-
-$result->close();
-$conexion->close();
-
+$idPukllay=$_SESSION['idPukllay'];
 
 include_once 'conexion.php';
 $objeto = new Conexion();
@@ -30,27 +16,26 @@ $conexion = $objeto->Conectar();
 $dniPart = (isset($_POST['dniPart'])) ? $_POST['dniPart'] : '';
 $nombPart = (isset($_POST['nombPart'])) ? $_POST['nombPart'] : '';
 $apelPart = (isset($_POST['apelPart'])) ? $_POST['apelPart'] : '';
-$celuPart = (isset($_POST['celuPart'])) ? $_POST['celuPart'] : '';
-$corePart = (isset($_POST['corePart'])) ? $_POST['corePart'] : '';
+$comparsa_idComparsa = (isset($_POST['comparsa_idComparsa'])) ? $_POST['comparsa_idComparsa'] : '';
 $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
 switch($opcion){
     case 1: 
-        $consulta = "INSERT INTO participante (dniPart,nombPart,apelPart,celuPart,corePart,comparsa_idComparsa) VALUES('$dniPart','$nombPart','$apelPart','$celuPart','$corePart','$idComparsa')";
+        $consulta = "INSERT INTO participante (dniPart,nombPart,apelPart,comparsa_idComparsa) VALUES('$dniPart','$nombPart','$apelPart','$comparsa_idComparsa')";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
-        $consulta = "SELECT dniPart,nombPart,apelPart,celuPart,corePart,comparsa_idComparsa FROM participante where dniPart='$dniPart' and comparsa_idComparsa='$comparsa_idComparsa'";
+        $consulta = "SELECT dniPart,nombPart,apelPart,comparsa_idComparsa FROM participante inner join comparsa on comparsa_idComparsa=idComparsa inner join delegado on delegado_dniDele=dniDele where usuario_idPukllay='$idPukllay' and dniPart='$dniPart'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: 
-        $consulta = "UPDATE participante SET nombPart='$nombPart', apelPart='$apelPart', celuPart='$celuPart', corePart='$corePart' WHERE dniPart='$dniPart' and comparsa_idComparsa='$comparsa_idComparsa'";	
+        $consulta = "UPDATE participante SET nombPart='$nombPart', apelPart='$apelPart' WHERE dniPart='$dniPart' and comparsa_idComparsa='$comparsa_idComparsa'";	
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT dniPart,nombPart,apelPart,celuPart,corePart,comparsa_idComparsa FROM participante where dniPart='$dniPart' and comparsa_idComparsa='$comparsa_idComparsa'";
+        $consulta = "SELECT dniPart,nombPart,apelPart,comparsa_idComparsa FROM participante inner join comparsa on comparsa_idComparsa=idComparsa inner join delegado on delegado_dniDele=dniDele where usuario_idPukllay='$idPukllay' and dniPart='$dniPart'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

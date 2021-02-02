@@ -28,10 +28,11 @@ $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo jurado");  
-    $(".dniH").css("display", "block");          
+    $(".modal-title").text("Nuevo participante");
+    $(".dniH").css("display", "block");       
+    $(".idH").css("display", "block");          
     $("#modal").modal("show");     
-    //idPremio=null;   
+    // idComparsa=null;   
     opcion = 1; //insertar
 });    
     
@@ -40,23 +41,22 @@ var fila; //capturar la fila para editar o borrar el registro
 //botón EDITAR    
 $(document).on("click", ".btnEditar", function(){
     fila = $(this).closest("tr");
-    dniJurado = fila.find('td:eq(0)').text();
-    nombJurado = fila.find('td:eq(1)').text();
-    apelJurado = fila.find('td:eq(2)').text();
-    coreJurado = fila.find('td:eq(3)').text();
-    estadoUsuario = fila.find('td:eq(4)').text();
-    
-    $("#dniJurado").val(dniJurado);
-    $("#nombJurado").val(nombJurado);
-    $("#apelJurado").val(apelJurado);
-    $("#coreJurado").val(coreJurado);
-    $("#estadoUsuario").val(estadoUsuario);
+    dniPart = fila.find('td:eq(0)').text();
+    nombPart = fila.find('td:eq(1)').text();
+    apelPart = fila.find('td:eq(2)').text();
+    comparsa_idComparsa = fila.find('td:eq(3)').text();
+
+    $("#dniPart").val(dniPart);
+    $("#nombPart").val(nombPart);
+    $("#apelPart").val(apelPart);
+    $("#comparsa_idComparsa").val(comparsa_idComparsa);
     opcion = 2; //editar
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar jurado");   
-    $(".dniH").css("display", "none");         
+    $(".modal-title").text("Editar participante");   
+    $(".dniH").css("display", "none");      
+    $(".idH").css("display", "none");        
     $("#modal").modal("show");  
     
 });
@@ -64,15 +64,15 @@ $(document).on("click", ".btnEditar", function(){
 //botón BORRAR
 $(document).on("click", ".btnBorrar", function(){    
     fila = $(this);
-    dniJurado = $(this).closest("tr").find('td:eq(0)').text();
-    opcion = 3 //borrar
-    var respuesta = confirm("¿Está seguro de eliminar el registro de dni: "+dniJurado+"?");
+    dniPart = $(this).closest("tr").find('td:eq(0)').text();
+    opcion = 3; //borrar
+    var respuesta = confirm("¿Está seguro de eliminar el registro de dni: "+dniPart+"?");
     if(respuesta){
         $.ajax({
-            url: "bd/crudoperariorjurados.php",
+            url: "bd/crudoperariorparticipantes.php",
             type: "POST",
             dataType: "json",
-            data: {opcion:opcion, dniJurado:dniJurado},
+            data: {opcion:opcion, dniPart:dniPart},
             success: function(){
                 tabla.row(fila.parents('tr')).remove().draw();
             }
@@ -82,28 +82,27 @@ $(document).on("click", ".btnBorrar", function(){
     
 $("#formModal").submit(function(e){
     e.preventDefault();    
-    dniJurado = $.trim($("#dniJurado").val());
-    nombJurado = $.trim($("#nombJurado").val());
-    apelJurado = $.trim($("#apelJurado").val());
-    coreJurado = $.trim($("#coreJurado").val());
-    estadoUsuario = $.trim($("#estadoUsuario").val());
+    dniPart = $.trim($("#dniPart").val());
+    nombPart = $.trim($("#nombPart").val());
+    apelPart = $.trim($("#apelPart").val());
+    comparsa_idComparsa = $.trim($("#comparsa_idComparsa").val());
+    // alert(dniPart);
     $.ajax({
-        url: "bd/crudoperariorjurados.php",
+        url: "bd/crudoperariorparticipantes.php",
         type: "POST",
         dataType: "json",
-        data: {dniJurado:dniJurado,nombJurado:nombJurado,apelJurado:apelJurado,coreJurado:coreJurado,estadoUsuario:estadoUsuario,opcion:opcion},
+        data: {dniPart:dniPart,nombPart:nombPart,apelPart:apelPart,comparsa_idComparsa:comparsa_idComparsa,opcion:opcion},
         success: function(data){ 
             //var datos=JSON.parse(data);
             console.log(data);
-            dniJurado = data[0].dniJurado;            
-            nombJurado = data[0].nombJurado;
-            coreJurado = data[0].coreJurado;
-            estadoUsuario = data[0].estadoUsuario;
-            apelJurado = data[0].apelJurado;
+            dniPart = data[0].dniPart;   
+            nombPart = data[0].nombPart;         
+            apelPart = data[0].apelPart;
+            comparsa_idComparsa = data[0].comparsa_idComparsa;
             if(opcion == 1){
-                tabla.row.add([dniJurado,nombJurado,apelJurado,coreJurado,estadoUsuario]).draw();}
+                tabla.row.add([dniPart,nombPart,apelPart,comparsa_idComparsa]).draw();}
             if(opcion == 2){
-                tabla.row(fila).data([dniJurado,nombJurado,apelJurado,coreJurado,estadoUsuario]).draw();}               
+                tabla.row(fila).data([dniPart,nombPart,apelPart,comparsa_idComparsa]).draw();}               
         }        
     });
     $("#modal").modal("hide");    
