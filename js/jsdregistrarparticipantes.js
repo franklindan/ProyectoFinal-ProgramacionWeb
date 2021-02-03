@@ -28,7 +28,8 @@ $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo participante");            
+    $(".modal-title").text("Nuevo participante");    
+    $(".dniH").css("display", "block");        
     $("#modal").modal("show");        
     opcion = 1; //insertar
 });    
@@ -53,7 +54,8 @@ $(document).on("click", ".btnEditar", function(){
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar participante");            
+    $(".modal-title").text("Editar participante"); 
+    $(".dniH").css("display", "none");             
     $("#modal").modal("show");  
     
 });

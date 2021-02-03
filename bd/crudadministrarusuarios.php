@@ -15,7 +15,13 @@ switch($opcion){
     case 1: 
         $consulta = "INSERT INTO usuario (idPukllay,usuarioUsuario,paswUsuario,tipoUsuario,estadoUsuario) VALUES('$idPukllay','$usuarioUsuario','$paswUsuario','$tipoUsuario','$estadoUsuario')";
         $resultado = $conexion->prepare($consulta);
-        $resultado->execute(); 
+        $resultado->execute();
+
+        if($tipoUsuario=="administrador"){
+        $consulta = "INSERT INTO administrador (dniAdministrador,usuario_idPukllay,usuario_usuarioUsuario) VALUES('$usuarioUsuario','$idPukllay','$usuarioUsuario')";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        }
 
         $consulta = "SELECT idPukllay,usuarioUsuario,paswUsuario,tipoUsuario,estadoUsuario FROM usuario where usuarioUsuario='$usuarioUsuario'";
         $resultado = $conexion->prepare($consulta);

@@ -147,7 +147,7 @@
                             </div>
                             <form id="formModal" method="post">
                                 <div class="modal-body">
-                                    <div class="form-group">
+                                    <div class="form-group dniH">
                                         <label for="dni" class="col-form-label">Dni:</label>
                                         <input type="text" class="form-control" id="dni">
                                     </div>

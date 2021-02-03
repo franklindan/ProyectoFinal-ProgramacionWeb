@@ -55,7 +55,7 @@ $("#btnNuevo").click(function(){
     $("#formModal").trigger("reset");
     $(".modal-header").css("background-color", "#28a745");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Nuevo operario");            
+    $(".modal-title").text("Nuevo usuario final indirecto");            
     $("#modal").modal("show");        
     id=$('#listaPuk').val();
     opcion = 1; //insertar
@@ -79,7 +79,7 @@ $(document).on("click", ".btnEditar", function(){
     
     $(".modal-header").css("background-color", "#007bff");
     $(".modal-header").css("color", "white");
-    $(".modal-title").text("Editar operario");            
+    $(".modal-title").text("Editar usuario final indirecto");            
     $("#modal").modal("show");  
     
 });

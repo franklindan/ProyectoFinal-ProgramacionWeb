@@ -325,71 +325,72 @@ function get_post($con, $var)
                     <div class="row">
                         <div class="col-6">
                             <h4 class="text-success">Delegado de la comparsa:</h4>
-                            <form action="index.php" method="post">
-                                <input type="text" class="form-group form-control" placeholder="DNI del delegado de comparsa" name="dnid">
-                                <input type="text" class="form-group form-control" placeholder="Nombres" name="nombred">
-                                <input type="text" class="form-group form-control" placeholder="Apellidos" name="apellidod">
-                                <input type="text" class="form-group form-control" placeholder="Correo electrónico" name="correod">
-                                <input type="text" class="form-group form-control" placeholder="Celular" name="celulard">
-                                <button class="btn btn-primary">Registrar delegado</button>
+                            <form id="formDelegado">
+                                <input id="dnid" type="text" class="form-group form-control" placeholder="DNI del delegado de comparsa">
+                                <input id="nombred" type="text" class="form-group form-control" placeholder="Nombres">
+                                <input id="apellidod" type="text" class="form-group form-control" placeholder="Apellidos">
+                                <input id="correod" type="text" class="form-group form-control" placeholder="Correo electrónico">
+                                <input id="celulard" type="text" class="form-group form-control" placeholder="Celular">
+                                <input id="idPukllay" type="hidden" value="<?php echo $idPukllay;?>">
+                                <button class="btn btn-primary btnDelegado">Registrar delegado</button>
                             </form>
                         </div>
                         <div class="col-6">
                             <h4 class="text-success">Registrar comparsa:</h4>
-                            <form action="index.php" method="post">
-                                <input type="text" class="form-control form-group" placeholder="Nombre de comparsa" name="nombrec">
-                                <input type="text" class="form-control form-group" placeholder="Procedencia" name="procedencia">
-                                <input type="text" class="form-control form-group" placeholder="Cantidad de participantes" name="cantidad">
-                                <input type="text" class="form-control form-group" placeholder="Categoría" name="categoria">
-                                <input type="text" class="form-control form-group" placeholder="DNI delegado" name="dnic">
-                                <button class="btn btn-primary">Registrar comparsa</button>
+                            <form id="formComparsa">
+                                <input id="nombrec" type="text" class="form-control form-group" placeholder="Nombre de comparsa">
+                                <input id="procedencia" type="text" class="form-control form-group" placeholder="Procedencia">
+                                <input id="cantidad" type="text" class="form-control form-group" placeholder="Cantidad de participantes">
+                                <input id="categoria" type="text" class="form-control form-group" placeholder="Categoría">
+                                <input id="dnic" type="text" class="form-control form-group" placeholder="DNI delegado">
+                                <button class="btn btn-primary btnComparsa">Registrar comparsa</button>
                             </form>
                         </div>
                     </div>
                 </div>
 
                 <?php
-                $conexion=new mysqli($host,$user,$password,$database,$port);
-                if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+                // $conexion=new mysqli($host,$user,$password,$database,$port);
+                // if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
                 
-                if (isset($_POST['dnid']) &&
-                    isset($_POST['nombred']) &&
-                    isset($_POST['apellidod']) &&
-                    isset($_POST['correod']) &&
-                    isset($_POST['celulard']))
-                {
-                    $dnid = get_post($conexion, 'dnid');
-                    $nombred = get_post($conexion, 'nombred');
-                    $apellidod = get_post($conexion, 'apellidod');
-                    $correod = get_post($conexion, 'correod');
-                    $celulard = get_post($conexion, 'celulard');
-                    $pass = get_post($conexion, 'dnid');;//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
-                    $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$dnid', '$pass', 'delegado','activo')";
-                    $result = $conexion->query($query);
-                    if (!$result) echo "INSERT falló <br><br>";
-                    $query = "INSERT INTO delegado (dniDele,nombDele, apelDele,celuDele,coreDele,usuario_idPukllay,usuario_usuarioUsuario) VALUES ('$dnid', '$nombred', '$apellidod','$celulard','$correod','$idPukllay','$dnid')";
-                    $result = $conexion->query($query);
-                    if (!$result) echo "INSERT falló <br><br>";
-                }
+                // if (isset($_POST['dnid']) &&
+                //     isset($_POST['nombred']) &&
+                //     isset($_POST['apellidod']) &&
+                //     isset($_POST['correod']) &&
+                //     isset($_POST['celulard']))
+                // {
+                //     $dnid = get_post($conexion, 'dnid');
+                //     $nombred = get_post($conexion, 'nombred');
+                //     $apellidod = get_post($conexion, 'apellidod');
+                //     $correod = get_post($conexion, 'correod');
+                //     $celulard = get_post($conexion, 'celulard');
+                //     $pass = get_post($conexion, 'dnid');//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
+                //     $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$dnid', '$pass', 'delegado','activo')";
+                //     $result = $conexion->query($query);
+                //     if (!$result) echo "INSERT falló <br><br>";
+                //     $query = "INSERT INTO delegado (dniDele,nombDele, apelDele,celuDele,coreDele,usuario_idPukllay,usuario_usuarioUsuario) VALUES ('$dnid', '$nombred', '$apellidod','$celulard','$correod','$idPukllay','$dnid')";
+                //     $result = $conexion->query($query);
+                //     if (!$result) echo "INSERT falló <br><br>";
+                // }
 
-                if (isset($_POST['nombrec']) &&
-                    isset($_POST['procedencia']) &&
-                    isset($_POST['cantidad']) &&
-                    isset($_POST['categoria']) &&
-                    isset($_POST['dnic']))
-                {
-                    $nombrec = get_post($conexion, 'nombrec');
-                    $procedencia = get_post($conexion, 'procedencia');
-                    $cantidad = get_post($conexion, 'cantidad');
-                    $categoria = get_post($conexion, 'categoria');
-                    $dnic = get_post($conexion, 'dnic');
-                    $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoría,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
-                    $result = $conexion->query($query);
-                    if (!$result) echo "INSERT falló <br><br>";
-                }
+                // if (isset($_POST['nombrec']) &&
+                //     isset($_POST['procedencia']) &&
+                //     isset($_POST['cantidad']) &&
+                //     isset($_POST['categoria']) &&
+                //     isset($_POST['dnic']))
+                // {
+                //     $nombrec = get_post($conexion, 'nombrec');
+                //     $procedencia = get_post($conexion, 'procedencia');
+                //     $cantidad = get_post($conexion, 'cantidad');
+                //     $categoria = get_post($conexion, 'categoria');
+                //     $dnic = get_post($conexion, 'dnic');
+                //     $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoría,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
+                //     $result = $conexion->query($query);
+                //     if (!$result) echo "INSERT falló <br><br>";
+                // }
                 
             
-                $conexion->close();
+                // $conexion->close();
                
              
                 
@@ -457,7 +458,6 @@ function get_post($con, $var)
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="DataTables/datatables.min.js"></script>
-    <script src="js/menu.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
