@@ -16,7 +16,7 @@ $result = $conexion->query($query);
 if (!$result) die ("Falló el acceso a la base de datos");
 
 $row = $result->fetch_array(MYSQLI_NUM);
-$idComparsa = $row[0];
+$comparsa_idComparsa = $row[0];
 
 $result->close();
 $conexion->close();
@@ -36,7 +36,7 @@ $opcion = (isset($_POST['opcion'])) ? $_POST['opcion'] : '';
 
 switch($opcion){
     case 1: 
-        $consulta = "INSERT INTO participante (dniPart,nombPart,apelPart,celuPart,corePart,comparsa_idComparsa) VALUES('$dniPart','$nombPart','$apelPart','$celuPart','$corePart','$idComparsa')";
+        $consulta = "INSERT INTO participante (dniPart,nombPart,apelPart,celuPart,corePart,comparsa_idComparsa) VALUES('$dniPart','$nombPart','$apelPart','$celuPart','$corePart','$comparsa_idComparsa')";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
