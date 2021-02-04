@@ -82,7 +82,9 @@
                                     $objeto = new Conexion();
                                     $conexion = $objeto->Conectar();
 
-                                    $consulta = "SELECT * FROM etapa";
+                                    $idPukllay=$_SESSION['idPukllay'];
+
+                                    $consulta = "SELECT * FROM etapa where idPukllay='$idPukllay'";
                                     $resultado = $conexion->prepare($consulta);
                                     $resultado->execute();
                                     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

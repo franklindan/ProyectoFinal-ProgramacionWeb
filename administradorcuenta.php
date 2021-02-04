@@ -30,7 +30,7 @@
     }
 
     ?>
-
+    <div id="contenido">
     <div class="d-flex">
         <div id="sidebar-container" class="bg-primary">
             <div class="logo">
@@ -78,19 +78,37 @@
                         <div class="col-6">
                             <h4 class="p-2 text-mute">Datos de usuario</h4>
                             <form id="formUsuario">
-                                <input id="nombre" type="text" class="form-group form-control" placeholder="Nombre">
-                                <input id="apellido" type="text" class="form-group form-control" placeholder="Apellido">
-                                <input id="celular" type="text" class="form-group form-control" placeholder="Celuar">
-                                <input id="Correo" type="text" class="form-group form-control" placeholder="Correo electrónico">
-                                <input id="dirrecion" type="text" class="form-group form-control" placeholder="Domicilio">
+                            <?php
+                            require_once 'bd/conexiondatos.php';
+                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+                            $dniUsuario=$_SESSION['usuario'];   
+
+                            $query = "SELECT * FROM administrador where dniAdministrador='$dniUsuario'";
+                            $result = $conexion->query($query);
+                            if (!$result) die ("Falló el acceso a la base de datos");
+
+                            $row = $result->fetch_array(MYSQLI_NUM);
+                            $result->close();
+                            
+                            ?>
+                                <input id="nombre" type="text" class="form-group form-control" placeholder="Nombre" value="<?php echo $row[1]; ?>">
+                                <input id="apellido" type="text" class="form-group form-control" placeholder="Apellido" value="<?php echo $row[2]; ?>">
+                                <input id="celular" type="text" class="form-group form-control" placeholder="Celuar" value="<?php echo $row[3]; ?>">
+                                <input id="Correo" type="text" class="form-group form-control" placeholder="Correo electrónico" value="<?php echo $row[4]; ?>">
+                                <input id="dirrecion" type="text" class="form-group form-control" placeholder="Domicilio" value="<?php echo $row[5]; ?>">
                                 <button class="btn btn-primary btnUsuario">Guardar</button>
+                            <?php
+                            $conexion->close();
+                            ?>    
                             </form>
                         </div>
                         <div class="col-6">
                             <h4 class="p-2 text-mute">Actualizar contraseña</h4>
                             <form id="formContraseña">
-                                <input id="contraseña" type="text" class="form-control form-group" placeholder="Contraseña">
-                                <input id="nuevaContraseña" type="text" class="form-control form-group" placeholder="Nueva contraseña">
+                                <input id="contraseña" type="password" class="form-control form-group" placeholder="Contraseña">
+                                <input id="nuevaContraseña" type="password" class="form-control form-group" placeholder="Nueva contraseña">
                                 <button class="btn btn-primary btnContraseña">Actualizar contraseña</button>
                             </form>
                         </div>
@@ -100,9 +118,7 @@
             
         </div>
     </div>
-
-
-
+    </div>
 
     
 <!--
