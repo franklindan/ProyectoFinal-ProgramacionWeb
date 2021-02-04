@@ -68,16 +68,49 @@
             </nav>
             
             <!--Contenido-->
-            <div class="" id="content">
-                <section>
-                    <div class="container">
-                        <h1 class="font-weight-bold mb-0">Bienvenido al Sistema de gestión del evento Pukllay</h1>
-                        <p class="lead text-muted">Jurado:</p>
-                        <p class="text-justify">Se le da la bienvenida al sistema esperando que pueda realizar su labor exitosamente. Recuerde haber leido y revizado el correo que se lenvio a su correo que brindo para obtener el acceso al sistema. Se le vuelve a recalcalcar que el uso del usuario y contraseña es de uso personal e intransferrible. Comunicarse con los administradores ante cualquier inconveniente o escribir al correo que se le envio para su acceso al sistema.</p>
-                        <p class="lead text-muted">Acerca del sistema:</p>
-                        <p class="text-justify">El sistema de gestión del evento Pukllay consiste en facilitar el funcionamiento y gestión del evento carnavalesco electrónicamente mediante un aplicativo web. El Pukllay, es un carnaval originario y considerado el más grande del sur del Perú celebrado para expresar la cultura ancestral que ha perdurado desde el 2003 hasta el presente año. Se lleva a cabo a inicios del mes de marzo, en la ciudad de Andahuaylas y es conocida también como el carnaval originario del Perú que reúne a un promedio de más de 50 comunidades campesinas, distritos, provincias de toda la región de Apurímac; además, de los departamentos del Perú y otros países invitados a participar en este evento. La necesidad de automatizar los procesos de dicho evento surge cuando dicho evento comienza a crecer y evolucionar. En donde el registro de las comparsas y participantes aún se realiza manualmente en hojas de papel para luego ser almacenadas en una base de datos, donde muchos participantes que escucharon del evento y desean participar no tienen la facilidad de informarse más y registrarse en dicho evento, la demora en saber los puntajes de las comparsas en cada etapa. Problemas que podrían ser solucionados perfectamente con un aplicativo web. Por ello se propone la automatización de los procesos de registro de comparsas, calificación de los jurados en un aplicativo web, visualización de las calificaciones y puntajes de las comparsas en tiempo real, administración y gestión del evento Pukllay. La automatización de dichos procesos facilitara el correcto funcionamiento del evento y solucionara los diversos problemas.</p> 
+            <div class="container" id="content">
+                <div class="container">
+                    <h2 class="p-3 text-center font-weight-bold mb-0">Configuración de cuenta de usuario</h2>
+                    <div class="row">
+                        <div class="col-6">
+                            <h4 class="p-2 text-mute">Datos de usuario</h4>
+                            <form id="formUsuario">
+                            <?php
+                            require_once 'bd/conexiondatos.php';
+                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+                            $dniUsuario=$_SESSION['usuario'];   
+
+                            $query = "SELECT * FROM jurado where dniJurado='$dniUsuario'";
+                            $result = $conexion->query($query);
+                            if (!$result) die ("Falló el acceso a la base de datos");
+
+                            $row = $result->fetch_array(MYSQLI_NUM);
+                            $result->close();
+                            
+                            ?>
+                                <input id="nombre" type="text" class="form-group form-control" placeholder="Nombre" value="<?php echo $row[1]; ?>">
+                                <input id="apellido" type="text" class="form-group form-control" placeholder="Apellido" value="<?php echo $row[2]; ?>">
+                                <input id="celular" type="text" class="form-group form-control" placeholder="Celuar" value="<?php echo $row[3]; ?>">
+                                <input id="Correo" type="text" class="form-group form-control" placeholder="Correo electrónico" value="<?php echo $row[4]; ?>">
+                                <input id="dirrecion" type="text" class="form-group form-control" placeholder="Domicilio" value="<?php echo $row[5]; ?>">
+                                <button class="btn btn-primary btnUsuario">Guardar</button>
+                            <?php
+                            $conexion->close();
+                            ?>    
+                            </form>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="p-2 text-mute">Actualizar contraseña</h4>
+                            <form id="formContraseña">
+                                <input id="contraseña" type="password" class="form-control form-group" placeholder="Contraseña">
+                                <input id="nuevaContraseña" type="password" class="form-control form-group" placeholder="Nueva contraseña">
+                                <button class="btn btn-primary btnContraseña">Actualizar contraseña</button>
+                            </form>
+                        </div>
                     </div>
-                </section>
+                </div>
             </div>
             
         </div>
@@ -98,6 +131,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jsjuradocuenta.js"></script>
 </body>
 </html>

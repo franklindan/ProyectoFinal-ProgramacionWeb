@@ -29,7 +29,7 @@ $(document).on("click", ".btnUsuario", function(){
            
         }        
     });
-    $(location).attr('href','#content');
+    $(location).attr('href','#contenido');
     // $("#formUsuario").trigger("reset");
 });
 
@@ -47,7 +47,7 @@ $(document).on("click", ".btnContraseña", function(){
             alert("Usuario:"+dni+". Se actualizó su contraseña correctamente");             
         }        
     }); 
-    $(location).attr('href','#content');
+    $(location).attr('href','#contenido');
     $("#formContraseña").trigger("reset"); 
 }); 
        
