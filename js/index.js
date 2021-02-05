@@ -3,6 +3,7 @@ $(document).ready(function(){
 // $("#idPukllay").css("display", "none");
 
 $(document).on("click", ".btnDelegado", function(){
+    $(location).attr('href','#registrar');
     idPukllay = $.trim($("#idPukllay").val());
     dnid = $.trim($("#dnid").val());
     nombred = $.trim($("#nombred").val());
@@ -25,6 +26,7 @@ $(document).on("click", ".btnDelegado", function(){
 });
 
 $(document).on("click", ".btnComparsa", function(){
+    $("#formComparsa").trigger("reset");
     nombrec = $.trim($("#nombrec").val());
     procedencia = $.trim($("#procedencia").val());
     cantidad = $.trim($("#cantidad").val());
@@ -51,6 +53,76 @@ $(document).on("click", ".btnRe", function(){
 $(document).on("click", ".btnCom", function(){
     alert("Se habilitará esta opción mas adelante"); 
 }); 
+
+$(document).on("click", "#form1b", function(){ 
+    $(location).attr('href','#inicio');
+    usuario = $.trim($("#form1d").val());
+    password = $.trim($("#form1c").val());
+    $.ajax({
+        url: "bd/crudindex.php",
+        type: "POST",
+        dataType: "json",
+        data: {dni:usuario,contraseña:password},
+        success: function(data){ 
+            //var datos=JSON.parse(data);
+            console.log(data);
+            alert("Bienvenido:"+data[3]);
+
+            url="./"+data[3]+".php";
+            $(location).attr('href',url);
+        }        
+    }).fail( function() {
+        alert("Datos incorrectos.");
+    });
+    $(location).attr('href','#inicio');
+    $("#form1").trigger("reset");    
+});
+$(document).on("click", "#form2b", function(){    
+    $(location).attr('href','#jurados');
+    usuario = $.trim($("#form2d").val());
+    password = $.trim($("#form2c").val());
+    $.ajax({
+        url: "bd/crudindex.php",
+        type: "POST",
+        dataType: "json",
+        data: {dni:usuario,contraseña:password},
+        success: function(data){ 
+            //var datos=JSON.parse(data);
+            console.log(data);
+            alert("Bienvenido:"+data[3]);
+
+            url="./"+data[3]+".php";
+            $(location).attr('href',url);
+        }        
+    }).fail( function() {
+        alert("Datos incorrectos.");
+    });
+    $(location).attr('href','#jurados');
+    $("#form2").trigger("reset");    
+});
+$(document).on("click", "#form3b", function(){      
+    $(location).attr('href','#registrar');
+    usuario = $.trim($("#form3d").val());
+    password = $.trim($("#form3c").val());
+    $.ajax({
+        url: "bd/crudindex.php",
+        type: "POST",
+        dataType: "json",
+        data: {dni:usuario,contraseña:password},
+        success: function(data){ 
+           //var datos=JSON.parse(data);
+           console.log(data);
+           alert("Bienvenido:"+data[3]);
+
+           url="./"+data[3]+".php";
+           $(location).attr('href',url);
+        }        
+    }).fail( function() {
+        alert("Datos incorrectos.");
+    });  
+    $(location).attr('href','#registrar');
+    $("#form3").trigger("reset");   
+});
    
     
 });
