@@ -7,20 +7,20 @@ if (isset($_POST['usuarioUsuario']) &&
     isset($_POST['nombDele']) &&
     isset($_POST['apelDele']) &&
     isset($_POST['coreDele']) &&
-    isset($_POST['celuDele']) &&
+    isset($_POST['pswUsuario']) &&
     isset($_POST['idPukllay']))
 {
     $usuarioUsuario = get_post($conexion, 'usuarioUsuario');
     $nombDele = get_post($conexion, 'nombDele');
     $apelDele = get_post($conexion, 'apelDele');
     $coreDele = get_post($conexion, 'coreDele');
-    $celuDele = get_post($conexion, 'celuDele');
+    $pswUsuario = get_post($conexion, 'pswUsuario');
     // $pass = get_post($conexion, 'dnid');//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
     $idPukllay = get_post($conexion, 'idPukllay');
-    $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$usuarioUsuario', '$usuarioUsuario', 'delegado','activo')";
+    $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$usuarioUsuario', '$pswUsuario', 'delegado','activo')";
     $result = $conexion->query($query);
     if (!$result) echo "INSERT falló <br><br>";
-    $query = "INSERT INTO delegado (dniDele,nombDele, apelDele,celuDele,coreDele,usuario_idPukllay,usuario_usuarioUsuario) VALUES ('$usuarioUsuario', '$nombDele', '$apelDele','$celuDele','$coreDele','$idPukllay','$usuarioUsuario')";
+    $query = "INSERT INTO delegado (dniDele,nombDele, apelDele,coreDele,usuario_idPukllay,usuario_usuarioUsuario) VALUES ('$usuarioUsuario', '$nombDele', '$apelDele','$coreDele','$idPukllay','$usuarioUsuario')";
     $result = $conexion->query($query);
     if (!$result) echo "INSERT falló <br><br>";
 }

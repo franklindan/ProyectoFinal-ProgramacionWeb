@@ -330,7 +330,7 @@ function get_post($con, $var)
                                 <input id="nombred" type="text" class="form-group form-control" placeholder="Nombres">
                                 <input id="apellidod" type="text" class="form-group form-control" placeholder="Apellidos">
                                 <input id="correod" type="text" class="form-group form-control" placeholder="Correo electrónico">
-                                <input id="celulard" type="text" class="form-group form-control" placeholder="Celular">
+                                <input id="contraseñad" type="password" class="form-group form-control" placeholder="Contraseña">
                                 <input id="idPukllay" type="hidden" value="<?php echo $idPukllay;?>">
                                 <button class="btn btn-primary btnDelegado">Registrar delegado</button>
                             </form>
@@ -401,7 +401,7 @@ function get_post($con, $var)
                     <div class="card bg-success">
                         <div class="card-body">
                             <h5 class="text-center">Inicia sesión</h5>
-                            <p class="text-center">Revise su correo electrónico para iniciar sesión o ingrese su dni como contraseña</p>
+                            <p class="text-center">Si no proporciono una contraseña, ingrese su dni como contraseña</p>
                             <form action="index.php" method="post">
                                 <input type="text" class="form-control form-group" placeholder="DNI" name="dni">
                                 <input type="password" class="form-control form-group" placeholder="Contraseña" name="contraseña">
