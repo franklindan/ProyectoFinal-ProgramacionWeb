@@ -134,8 +134,9 @@
                
                </div>
                <div class="px-lg-5 py-lg-4 p-4 w-100 align-self-center">
+                   <div id="loginF" class="loginF">
                    <h1 class="font-weight-bold mb-4">Bienvenido de vuelta</h1>
-                   <form action="login.php" method="post">
+                   <form id='formC' action="login.php" method="post">
                      <div class="mb-4">
                         <label for="perfil" class="form-label font-weight-bold">Perfil</label>
                         <select class="form-control" name="cboNivel">
@@ -153,10 +154,12 @@
                       <div class="mb-4">
                         <label for="contraseña" class="form-label font-weight-bold">Contraseña</label>
                         <input type="password" class="form-control mb-2" id="contraseña" placeholder="Ingrese su contraseña" name="contraseña">
-                        <a href="" class="form-text text-light text-decoration-none">¿Olvidaste tu contraseña?</a>
+                        <a href="#" id="recuperar" class="form-text text-light text-decoration-none">¿Olvidaste tu contraseña?</a>
                       </div>
                       <input type="submit" class="btn btn-primary w-100" value="Iniciar sesión">
                     </form>
+
+                    </div>
                </div>
                <div class="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 w-100 mt-auto">
                    <a href="index.php" class="text-decoration-none text-light font-weight-bold">Regresar a la página principal</a>
@@ -178,6 +181,6 @@
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jslogin.js"></script>
 </body>
 </html>

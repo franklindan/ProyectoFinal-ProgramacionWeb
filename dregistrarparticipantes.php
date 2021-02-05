@@ -41,7 +41,7 @@
                 <a href="delegado.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
                 <a href="dregistrarparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
                 <a href="dvpuntaje.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje</a>
-                <a href="dvcomentarios.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar comentarios</a>
+                <a href="dvcomentarios.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje acumulado</a>
                 <a href="dvranking.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar ranking</a>
             </div>
         </div>

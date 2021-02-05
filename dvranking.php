@@ -40,7 +40,7 @@
                 <a href="delegado.php" class="d-block p-3 text-light"><i class="icon ion-md-apps mr-2 lead"></i>Inicio</a>
                 <a href="dregistrarparticipantes.php" class="d-block p-3 text-light"><i class="icon ion-md-person-add mr-2 lead"></i>Registrar participantes</a>
                 <a href="dvpuntaje.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje</a>
-                <a href="dvcomentarios.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar comentarios</a>
+                <a href="dvcomentarios.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar puntaje acumulado</a>
                 <a href="dvranking.php" class="d-block p-3 text-light"><i class="icon ion-md-eye mr-2 lead"></i>Visualizar ranking</a>
             </div>
         </div>
@@ -71,7 +71,65 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                
+                <section>
+                    <div class="container">
+                        <h1 class="font-weight-bold mb-0 py-3">Visualizar ranking de todas las comparsas</h1>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <td>Puesto</td>
+                                                <td>Nombre de la comparsa</td>
+                                                <td>Puntaje total hasta el momento</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            require_once 'bd/conexiondatos.php';
+                                            $conexion=new mysqli($host,$user,$password,$database,$port);
+                                            if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
+
+                                            $query = "CREATE temporary table ranking (
+                                                puesto int primary key AUTO_INCREMENT,
+                                                nombre varchar(80),
+                                                puntaje int(11));";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos1");
+
+                                            $query = "INSERT into ranking (nombre,puntaje) SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa on 
+                                            comparsa_idComparsa=idComparsa group by comparsa_idComparsa order by Puntaje_total desc;";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos2");
+
+                                            $query = "SELECT * from ranking;";
+                                            $result = $conexion->query($query);
+                                            if (!$result) die ("Falló el acceso a la base de datos3");
+                                            
+
+                                            
+                                            while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $data['puesto'] ?></td>
+                                                <td><?php echo $data['nombre'] ?></td>
+                                                <td><?php echo $data['puntaje'] ?></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            $result->close();
+                                            $conexion->close();
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             
         </div>
@@ -91,7 +149,5 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
 </body>
 </html>

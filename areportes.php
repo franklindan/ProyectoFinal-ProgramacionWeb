@@ -72,9 +72,69 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                <div class="container">
-                    <h1 class="font-weight-bold mb-0 py-2">Reportes</h1>
-                </div>    
+                <section>
+                    <div class="container">
+                        <h1 class="font-weight-bold mb-0 py-3">Reportes de usuarios</h1>
+                        <div class="row">
+                        <div class="col-3">
+                        <select id="listaUsuario" class="form-control" name="listaUsuario">
+                            <option value="0">Seleccionar tipo de usuario</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="jurado">Jurado</option>
+                            <option value="delegado">Delegado</option>
+                            <option value="operario">Operario</option>
+                            <option value="FinalIndirecto">Final indirecto</option>
+                        </select>
+                        </div>
+                        <div class="col-3">
+                        <select id="listaPuk" class="form-control" name="listaPuk">
+                            <option value="0">Seleccionar Pukllay</option>
+                            <?php
+                            include_once 'bd/conexion.php';
+                            $objeto = new Conexion();
+                            $conexion = $objeto->Conectar();
+
+                            $consulta = "SELECT idPukllay FROM pukllay";
+                            $resultado = $conexion->prepare($consulta);
+                            $resultado->execute();
+                            $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($data as $dat) {
+                            ?>    
+                            <option value="<?php echo $dat['idPukllay'] ?>"><?php echo $dat['idPukllay'] ?></option>
+                            <?php
+                            }
+                            $resultado = NULL;
+                            $conexion = NULL;    
+                            ?>
+                        </select>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive pt-3">
+                                    <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
+                                        <thead class="text-center">
+                                            <tr>
+                                                <td>Dni</td>
+                                                <td>Nombre</td>
+                                                <td>Apellido</td>
+                                                <td>Celular</td>
+                                                <td>Correo</td>
+                                                <td>Dirreción</td>
+                                                <td>idPukllay</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             
         </div>
@@ -94,7 +154,6 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="DataTables/datatables.min.js"></script>
     <script src="js/jsareportes.js"></script>
 </body>
 </html>
