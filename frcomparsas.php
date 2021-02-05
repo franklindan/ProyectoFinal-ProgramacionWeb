@@ -70,7 +70,62 @@
             
             <!--Contenido-->
             <div class="" id="content">
-                
+                <section>
+                    <div class="container">
+                        <h1 class="font-weight-bold mb-0 py-3">Reportes de comparsas y participantes</h1>
+                        <div class="row">
+                        <div class="col-3">
+                        <select id="listaReporte" class="form-control" name="listaUsuario">
+                            <option value="0">Seleccionar reporte</option>
+                            <option value="comparsa">Comparsas</option>
+                            <option value="participante">Participantes</option>
+                        </select>
+                        </div>
+                        <div class="col-3">
+                        <select id="listaPuk" class="form-control" name="listaPuk">
+                            <option value="0">Seleccionar Pukllay</option>
+                            <?php
+                            include_once 'bd/conexion.php';
+                            $objeto = new Conexion();
+                            $conexion = $objeto->Conectar();
+
+                            $consulta = "SELECT idPukllay FROM pukllay";
+                            $resultado = $conexion->prepare($consulta);
+                            $resultado->execute();
+                            $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($data as $dat) {
+                            ?>    
+                            <option value="<?php echo $dat['idPukllay'] ?>"><?php echo $dat['idPukllay'] ?></option>
+                            <?php
+                            }
+                            $resultado = NULL;
+                            $conexion = NULL;    
+                            ?>
+                        </select>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive pt-3">
+                                    <table id="tabla" class="table table-striped table-bordered table-condensed" style="width:100%">
+                                        <thead class="text-center">
+                                            <tr id="headRow">
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
             
         </div>
@@ -90,7 +145,6 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="DataTables/datatables.min.js"></script>
-    <script src="js/jsadministrarusuarios.js"></script>
+    <script src="js/jsfrcomparsas.js"></script>
 </body>
 </html>

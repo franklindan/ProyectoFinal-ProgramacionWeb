@@ -185,7 +185,7 @@ function get_post($con, $var)
                 <div class="text-center p-5">
                     <h2 class="display-4 text-center">¿QUE ES PUKLLAY?</h2>
                     <p class="lead text-justify">Es un evento que representa la diversidad de danzas y músicas, así como las típicas costumbres de las comunidades campesinas del territorio apurimeño y del todo el Perú. Por su traducción del quechua significa "juega" ,donde participan y se divierten comparsas de los ámbitos rural y urbano de Andahuaylas, delegaciones regionales y delegaciones internacionales.</p>
-                    <button type="button" class="btn btn-outline-secondary text-white">Inscribir comparsa</button>
+                    <button type="button" class="btn btn-outline-secondary text-white btnRe">Inscribir comparsa</button>
                 </div>
             </div>
         </div>
@@ -270,7 +270,7 @@ function get_post($con, $var)
                 <div class="text-center p-5">
                     <h2 class="display-4">Participa en los enventos del Pukllay</h2>
                     <p class="lead text-justify">No te pierdas de la gran presentación y concurso en el estadio de andahuaylas "Los Chankas" Tinkuy "Encuentro de comparsas" el dia 29 de marzo. Compra tu ticket de ingreso al estadio en un solo click y disfruta con nosotros!!!</p>
-                    <button type="button" class="btn btn-outline-secondary text-white">Comprar ticket de ingreso al estadio</button>
+                    <button type="button" class="btn btn-outline-secondary text-white btnCom">Comprar ticket de ingreso al estadio</button>
                 </div>
             </div>
         </div>

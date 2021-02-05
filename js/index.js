@@ -16,8 +16,10 @@ $(document).on("click", ".btnDelegado", function(){
         data: {usuarioUsuario:dnid,nombDele:nombred,apelDele:apellidod,coreDele:correod,celuDele:celulard,idPukllay:idPukllay},
         success: function(){ 
             alert("Se registro el delegado exitosamente");             
-        }        
-    });
+        }      
+    }).fail( function() {
+        alert("Datos incorrectos.");    
+    })  ;
     $(location).attr('href','#registrar');
     $("#formDelegado").trigger("reset");
 });
@@ -36,9 +38,18 @@ $(document).on("click", ".btnComparsa", function(){
         success: function(){ 
             alert("Se registro la comparsa exitosamente");             
         }        
+    }).fail( function() {
+        alert("Datos incorrectos.");    
     }); 
     $(location).attr('href','#registrar');
     $("#formComparsa").trigger("reset"); 
+}); 
+
+$(document).on("click", ".btnRe", function(){
+    $(location).attr('href','#registrar'); 
+}); 
+$(document).on("click", ".btnCom", function(){
+    alert("Se habilitará esta opción mas adelante"); 
 }); 
    
     
