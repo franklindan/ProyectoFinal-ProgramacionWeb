@@ -8,12 +8,12 @@ $(document).on("click", ".btnDelegado", function(){
     nombred = $.trim($("#nombred").val());
     apellidod = $.trim($("#apellidod").val());
     correod = $.trim($("#correod").val());
-    celulard = $.trim($("#celulard").val());
+    contraseñad = $.trim($("#contraseñad").val());
     $.ajax({
         url: "bd/crudindex.php",
         type: "POST",
         dataType: "json",
-        data: {usuarioUsuario:dnid,nombDele:nombred,apelDele:apellidod,coreDele:correod,celuDele:celulard,idPukllay:idPukllay},
+        data: {usuarioUsuario:dnid,nombDele:nombred,apelDele:apellidod,coreDele:correod,pswUsuario:contraseñad,idPukllay:idPukllay},
         success: function(){ 
             alert("Se registro el delegado exitosamente");             
         }      
