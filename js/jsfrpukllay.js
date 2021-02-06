@@ -204,13 +204,17 @@ $('#listaReporte').on('change', function(){
         }  
 
     });
+});
 
-    $('#listaPuk').on('change', function(){
+
+
+$('#listaPuk').on('change', function(){
 
     $('#tabla thead td').remove();
     $('#tabla tbody td').remove();
     $('#tabla2 thead td').remove();
     $('#tabla2 tbody td').remove();
+    reporte = $('#listaReporte').val();
     pukllay = $('#listaPuk').val();
     $.ajax({
         url: "bd/crudfrpukllay.php",
@@ -409,11 +413,7 @@ $('#listaReporte').on('change', function(){
 
     });
 
-    });    
+    });
 
-
-
-
-});  
     
 });

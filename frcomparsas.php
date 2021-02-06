@@ -79,6 +79,7 @@
                             <option value="0">Seleccionar reporte</option>
                             <option value="comparsa">Comparsas</option>
                             <option value="participante">Participantes</option>
+                            <option value="ranking">Ranking</option>
                         </select>
                         </div>
                         <div class="col-3">

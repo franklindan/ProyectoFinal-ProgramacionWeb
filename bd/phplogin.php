@@ -89,8 +89,8 @@ include_once 'conexion.php';
 $objeto = new Conexion();
 $conexion = $objeto->Conectar();
 
-if($tipo=="administrador"){
-    $consulta="SELECT * from $tipo where coreAdmi='$correor' and dniAdministrador='$dnir'";
+if("administrador"==$tipo){
+    $consulta="SELECT * from administrador where coreAdmi='$correor' and dniAdministrador='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if (!$result) die ("Falló el acceso a la base de datos");
@@ -101,8 +101,8 @@ if($tipo=="administrador"){
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
 
 }
-if($tipo=="operario"){
-    $consulta="SELECT * from $tipo where coreOper='$correor' and dniOper='$dnir'";
+if("operario"==$tipo){
+    $consulta="SELECT * from operario where coreOper='$correor' and dniOper='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if (!$result) die ("Falló el acceso a la base de datos");
@@ -113,8 +113,8 @@ if($tipo=="operario"){
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
 
 }
-if($tipo=="jurado"){
-    $consulta="SELECT * from $tipo where coreJurado='$correor' and dniJurado='$dnir'";
+if("jurado"==$tipo){
+    $consulta="SELECT * from jurado where coreJurado='$correor' and dniJurado='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if (!$result) die ("Falló el acceso a la base de datos");
@@ -125,8 +125,8 @@ if($tipo=="jurado"){
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
 
 }
-if($tipo=="delegado"){
-    $consulta="SELECT * from $tipo where coreDele='$correor' and dniDele='$dnir'";
+if("delegado"==$tipo){
+    $consulta="SELECT * from delegado where coreDele='$correor' and dniDele='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if (!$result) die ("Falló el acceso a la base de datos");
@@ -136,8 +136,8 @@ if($tipo=="delegado"){
     }
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
 }
-if($tipo=="final indirecto"){
-    $consulta="SELECT * from $tipo where coreFinal='$correor' and dniFinal='$dnir'";
+if("final indirecto"==$tipo){
+    $consulta="SELECT * from finalindirecto where coreFinal='$correor' and dniFinal='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     if (!$result) die ("Falló el acceso a la base de datos");

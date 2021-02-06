@@ -27,7 +27,19 @@ switch($reporte){
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
-        break;               
+        break;    
+    case "ranking": 
+        if($pukllay==""){
+            $consulta = "SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa on 
+            comparsa_idComparsa=idComparsa group by comparsa_idComparsa order by Puntaje_total desc";
+        } else {
+            $consulta = "SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa 
+            on comparsa_idComparsa=idComparsa where etapa_idPukllay='$pukllay' group by comparsa_idComparsa order by Puntaje_total desc";    
+        }     
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+        break;           
 }
 
 

@@ -13,6 +13,7 @@ $(document).ready(function(){
             success: function(data){ 
                 //var datos=JSON.parse(data); 
                 console.log(data);
+                i=1;
                 data.forEach(dat => {       
     
                     if(reporte=="comparsa"){
@@ -86,15 +87,43 @@ $(document).ready(function(){
                             
                         $('#tabla tbody').append(filas);
                     }
+                    if(reporte=="ranking"){
+                        nombreComp = dat['nombreComp'];      
+                        Puntaje_total = dat['Puntaje_total'];
+    
+                        var filas = 
+                                '<td>Puesto</td>'+
+                                '<td>Nombre comparsa</td>'+
+                                '<td>Puntaje total</td>';
+                            
+                        $('#headRow').html(filas);
+                        
+                        var filas = '<tr>'+
+                                '<td>' + i + '</td>'+
+                                '<td>' + nombreComp + '</td>'+
+                                '<td>' + Puntaje_total + '</td>'+
+                            '</tr>';
+                            
+                        $('#tabla tbody').append(filas);
+                        i++;
+                    }
                 });                 
             }  
     
         });
+        
+          
     
-        $('#listaPuk').on('change', function(){
+    
+    
+    
+    }); 
+    
+    $('#listaPuk').on('change', function(){
     
         $('#tabla thead td').remove();
         $('#tabla tbody td').remove();
+        reporte = $('#listaReporte').val();
         pukllay = $('#listaPuk').val();
         $.ajax({
             url: "bd/crudfrcomparsas.php",
@@ -104,6 +133,7 @@ $(document).ready(function(){
             success: function(data){ 
                 //var datos=JSON.parse(data); 
                 console.log(data);
+                i=1;
                 data.forEach(dat => {       
     
                     if(reporte=="comparsa"){
@@ -177,16 +207,31 @@ $(document).ready(function(){
                             
                         $('#tabla tbody').append(filas);
                     }
+                    if(reporte=="ranking"){
+                        nombreComp = dat['nombreComp'];      
+                        Puntaje_total = dat['Puntaje_total'];
+    
+                        var filas = 
+                                '<td>Puesto</td>'+
+                                '<td>Nombre comparsa</td>'+
+                                '<td>Puntaje total</td>';
+                            
+                        $('#headRow').html(filas);
+                        
+                        var filas = '<tr>'+
+                                '<td>' + i + '</td>'+
+                                '<td>' + nombreComp + '</td>'+
+                                '<td>' + Puntaje_total + '</td>'+
+                            '</tr>';
+                            
+                        $('#tabla tbody').append(filas);
+                        i++;
+                    }
                 });                 
             }  
     
         });
     
-        });    
-    
-    
-    
-    
-    });  
+        });  
         
     });
