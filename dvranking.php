@@ -93,32 +93,38 @@
                                             $conexion=new mysqli($host,$user,$password,$database,$port);
                                             if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
 
-                                            $query = "CREATE temporary table ranking (
-                                                puesto int primary key AUTO_INCREMENT,
-                                                nombre varchar(80),
-                                                puntaje int(11));";
-                                            $result = $conexion->query($query);
-                                            // if (!$result) die ("Falló el acceso a la base de datos1 no crea la tabla temporal en el servidor");
+                                            // $query = "CREATE temporary table ranking (
+                                            //     puesto int primary key AUTO_INCREMENT,
+                                            //     nombre varchar(80),
+                                            //     puntaje int(11))";
+                                            // $result = $conexion->query($query);
+                                            // // if (!$result) die ("Falló el acceso a la base de datos1 no crea la tabla temporal en el servidor");
 
-                                            $query = "INSERT into ranking (nombre,puntaje) SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa on 
-                                            comparsa_idComparsa=idComparsa group by comparsa_idComparsa order by Puntaje_total desc;";
-                                            $result = $conexion->query($query);
-                                            // if (!$result) die ("Falló el acceso a la base de datos2");
+                                            // $query = "INSERT into ranking (nombre,puntaje) SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa on 
+                                            // comparsa_idComparsa=idComparsa group by comparsa_idComparsa order by Puntaje_total desc";
+                                            // $result = $conexion->query($query);
+                                            // // if (!$result) die ("Falló el acceso a la base de datos2");
 
-                                            $query = "SELECT * from ranking;";
-                                            $result = $conexion->query($query);
-                                            // if (!$result) die ("Falló el acceso a la base de datos3");
-                                            
+                                            // $query = "SELECT * from ranking";
+                                            // $result = $conexion->query($query);
+                                            // // if (!$result) die ("Falló el acceso a la base de datos3");
 
-                                            
+                                            $pukllay=$_SESSION['idPukllay'];        
+                                            $query = "SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa 
+                                            on comparsa_idComparsa=idComparsa where etapa_idPukllay='$pukllay' group by comparsa_idComparsa order by Puntaje_total desc";
+                                            $result = $conexion->query($query);
+
+                                            $i=1;
                                             while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $data['puesto'] ?></td>
-                                                <td><?php echo $data['nombre'] ?></td>
-                                                <td><?php echo $data['puntaje'] ?></td>
+                                                <td><?php echo $i ?></td>
+                                                <td><?php echo $data['nombreComp'] ?></td>
+                                                <td><?php echo $data['Puntaje_total'] ?></td>
                                             </tr>
+
                                             <?php
+                                            $i++;
                                             }
                                             $result->close();
                                             $conexion->close();

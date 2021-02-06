@@ -45,17 +45,27 @@ if (isset($_POST['nombrec']) &&
     print json_encode($result, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
 }
 
+function mysql_entities_fix_string($conexion, $string)
+{
+    return htmlentities(mysql_fix_string($conexion, $string));
+}
+function mysql_fix_string($conexion, $string)
+{
+    if (get_magic_quotes_gpc()) $string = stripslashes($string);
+    return $conexion->real_escape_string($string);
+}
 function get_post($con, $var)
 {
     return $con->real_escape_string($_POST[$var]);
 }
 
 
+
 if (isset($_POST['dni']) &&
     isset($_POST['contraseña']))
 { 
-    $user = get_post($conexion, 'dni');
-    $password = get_post($conexion, 'contraseña');
+    $user = mysql_entities_fix_string($conexion,get_post($conexion, 'dni'));
+    $password = mysql_entities_fix_string($conexion,get_post($conexion, 'contraseña'));
     $query = "SELECT * FROM usuario WHERE usuarioUsuario='$user' and paswUsuario='$password'";
     $result = $conexion->query($query);
     if (!$result) die ("Usurio no encontrado");
