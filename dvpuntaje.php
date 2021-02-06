@@ -98,14 +98,14 @@
                                             $dniDelegado=$_SESSION['usuario'];    
                                             $query = "SELECT * FROM comparsa where delegado_dniDele='$dniDelegado'";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            // if (!$result) die ("Falló el acceso a la base de datos");
                                             
                                             $row = $result->fetch_array(MYSQLI_NUM);
                                             $idComparsa = $row[0];
 
                                             $query = "SELECT * from calificacion INNER JOIN etapa on fechaDia=etapa_fechaDia where comparsa_idComparsa=$idComparsa order by etapa_fechaDia asc";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            // if (!$result) die ("Falló el acceso a la base de datos");
                                             
                                             while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
                                             ?>

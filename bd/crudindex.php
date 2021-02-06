@@ -38,7 +38,7 @@ if (isset($_POST['nombrec']) &&
     $cantidad = get_post($conexion, 'cantidad');
     $categoria = get_post($conexion, 'categoria');
     $dnic = get_post($conexion, 'dnic');
-    $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoría,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
+    $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoria,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
     $result = $conexion->query($query);
     if (!$result) echo "INSERT falló <br><br>";
 

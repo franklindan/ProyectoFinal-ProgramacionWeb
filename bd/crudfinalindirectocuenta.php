@@ -24,11 +24,11 @@ if (isset($_POST['nombre']) &&
     $Correo = $_POST['Correo'];
     $dirrecion = $_POST['dirrecion'];
     // $pass = get_post($conexion, 'dnid');//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
-    $consulta = "UPDATE FinalIndirecto set nombreFinal='$nombre',apelFinal='$apellido',celuFinal='$celular',coreFinal='$Correo',direFinal='$dirrecion' where dniFinal='$dniUsuario'";
+    $consulta = "UPDATE finalindirecto set nombreFinal='$nombre',apelFinal='$apellido',celuFinal='$celular',coreFinal='$Correo',direFinal='$dirrecion' where dniFinal='$dniUsuario'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute(); 
 
-    $consulta = "SELECT * FROM FinalIndirecto where dniFinal='$dniUsuario'";
+    $consulta = "SELECT * FROM finalindirecto where dniFinal='$dniUsuario'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

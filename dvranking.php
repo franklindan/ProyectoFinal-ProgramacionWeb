@@ -98,16 +98,16 @@
                                                 nombre varchar(80),
                                                 puntaje int(11));";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos1");
+                                            // if (!$result) die ("Falló el acceso a la base de datos1 no crea la tabla temporal en el servidor");
 
                                             $query = "INSERT into ranking (nombre,puntaje) SELECT nombreComp,sum(puntajeCalificacion) Puntaje_total from calificacion inner join comparsa on 
                                             comparsa_idComparsa=idComparsa group by comparsa_idComparsa order by Puntaje_total desc;";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos2");
+                                            // if (!$result) die ("Falló el acceso a la base de datos2");
 
                                             $query = "SELECT * from ranking;";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos3");
+                                            // if (!$result) die ("Falló el acceso a la base de datos3");
                                             
 
                                             

@@ -96,14 +96,14 @@
                                             $dniDelegado=$_SESSION['usuario'];    
                                             $query = "SELECT * FROM comparsa where delegado_dniDele='$dniDelegado'";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            // if (!$result) die ("Falló el acceso a la base de datos");
                                             
                                             $row = $result->fetch_array(MYSQLI_NUM);
                                             $idComparsa = $row[0];
 
                                             $query = "SELECT nombreDia,fechaDia,sum(puntajeCalificacion) from calificacion inner join etapa on etapa_fechaDia=fechaDia where comparsa_idComparsa=$idComparsa group by nombreDia";
                                             $result = $conexion->query($query);
-                                            if (!$result) die ("Falló el acceso a la base de datos");
+                                            // if (!$result) die ("Falló el acceso a la base de datos");
                                             
                                             while ($data = $result->fetch_array(MYSQLI_ASSOC)) {
                                             ?>
