@@ -129,7 +129,7 @@
                                                 <td><?php echo $data['idComparsa'] ?></td>
                                                 <td><?php echo $data['nombreComp'] ?></td>
                                                 <td><?php echo $data['Procedencia'] ?></td>
-                                                <td><?php echo $data['Categoría'] ?></td>
+                                                <td><?php echo $data['Categoria'] ?></td>
                                                 <td><?php echo $data['CantidadPart'] ?></td>
                                                 <td><?php echo $data['Financiamiento'] ?></td>
                                                 <td><?php echo $data['delegado_dniDele'] ?></td>

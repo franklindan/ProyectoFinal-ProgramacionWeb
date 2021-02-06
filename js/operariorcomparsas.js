@@ -95,14 +95,14 @@ $("#formModal").submit(function(e){
         url: "bd/crudoperariorcomparsas.php",
         type: "POST",
         dataType: "json",
-        data: {idComparsa:idComparsa,nombreComp:nombreComp,Procedencia:Procedencia,Categoría:Categoría,CantidadPart:CantidadPart,Financiamiento:Financiamiento,delegado_dniDele:delegado_dniDele,opcion:opcion},
+        data: {idComparsa:idComparsa,nombreComp:nombreComp,Procedencia:Procedencia,Categoria:Categoría,CantidadPart:CantidadPart,Financiamiento:Financiamiento,delegado_dniDele:delegado_dniDele,opcion:opcion},
         success: function(data){ 
             //var datos=JSON.parse(data);
             console.log(data);
             idComparsa = data[0].idComparsa;   
             nombreComp = data[0].nombreComp;         
             Procedencia = data[0].Procedencia;
-            Categoría = data[0].Categoría;
+            Categoría = data[0].Categoria;
             CantidadPart = data[0].CantidadPart;
             Financiamiento = data[0].Financiamiento;
             delegado_dniDele = data[0].delegado_dniDele;

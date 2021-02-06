@@ -50,9 +50,9 @@ switch($usuario){
         break;    
     case "FinalIndirecto": 
         if($pukllay==""){
-            $consulta = "SELECT * FROM FinalIndirecto";
+            $consulta = "SELECT * FROM finalindirecto";
         } else {
-            $consulta = "SELECT * FROM FinalIndirecto where usuario_idPukllay='$pukllay'";    
+            $consulta = "SELECT * FROM finalindirecto where usuario_idPukllay='$pukllay'";    
         }
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();

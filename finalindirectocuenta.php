@@ -83,7 +83,7 @@
 
                             $dniUsuario=$_SESSION['usuario'];   
 
-                            $query = "SELECT * FROM FinalIndirecto where dniFinal='$dniUsuario'";
+                            $query = "SELECT * FROM finalindirecto where dniFinal='$dniUsuario'";
                             $result = $conexion->query($query);
                             if (!$result) die ("Falló el acceso a la base de datos");
 

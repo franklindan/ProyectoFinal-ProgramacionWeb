@@ -136,7 +136,7 @@ if($tipo=="delegado"){
     }
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
 }
-if($tipo=="FinalIndirecto"){
+if($tipo=="final indirecto"){
     $consulta="SELECT * from $tipo where coreFinal='$correor' and dniFinal='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();

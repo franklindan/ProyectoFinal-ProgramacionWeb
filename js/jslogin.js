@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-alert("Solo se puede crear usuarios para los delegados en la página principal, los demas usuarios son registrados por el administrador y el operario, ya que así fue planificado el funcionamiento del sistema. Por esa razon, se habilitaron los siguientes usuarios para facilitar la visualización del sistema (El usuario y contraseña son los mismos): administrador: 72680370, operario:72680371, jurado:72680372, final Indirecto:72680373.");  
+alert("Solo se puede crear usuarios para los delegados en la página principal. Los demás usuarios son registrados por el administrador y el operario, ya que así fue planificado el funcionamiento del sistema. Por esa razon, se habilitaron los siguientes usuarios para facilitar la visualización del sistema (El usuario y contraseña son los mismos): administrador: 72680370, operario:72680371, jurado:72680372, final Indirecto:72680373.");  
     
 $("#recuperar").click(function(){
     var recuperar ="<h1 class='font-weight-bold mb-4'>Recuperar contraseña</h1>"+
@@ -58,8 +58,11 @@ $(document).on("click", "#formb", function(){
          //var datos=JSON.parse(data);
          console.log(data);
          alert("Bienvenido:"+data[3]);
-
-         url="./"+data[3]+".php";
+         if("final indirecto"==data[3]){ 
+          url="./finalindirecto.php";
+         } else {
+          url="./"+data[3]+".php";
+         }
          $(location).attr('href',url);
       }        
   }).fail( function() {

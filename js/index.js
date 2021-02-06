@@ -19,14 +19,14 @@ $(document).on("click", ".btnDelegado", function(){
             alert("Se registro el delegado exitosamente");             
         }      
     }).fail( function() {
-        alert("Datos incorrectos.");    
+        alert("Datos incorrectos o el delegado ya ha sido registrado.");    
     })  ;
     $(location).attr('href','#registrar');
     $("#formDelegado").trigger("reset");
 });
 
 $(document).on("click", ".btnComparsa", function(){
-    $("#formComparsa").trigger("reset");
+    $(location).attr('href','#registrar');
     nombrec = $.trim($("#nombrec").val());
     procedencia = $.trim($("#procedencia").val());
     cantidad = $.trim($("#cantidad").val());
@@ -68,7 +68,11 @@ $(document).on("click", "#form1b", function(){
             console.log(data);
             alert("Bienvenido:"+data[3]);
 
-            url="./"+data[3]+".php";
+            if("final indirecto"==data[3]){ 
+                url="./finalindirecto.php";
+               } else {
+                url="./"+data[3]+".php";
+               }
             $(location).attr('href',url);
         }        
     }).fail( function() {
@@ -91,7 +95,11 @@ $(document).on("click", "#form2b", function(){
             console.log(data);
             alert("Bienvenido:"+data[3]);
 
-            url="./"+data[3]+".php";
+            if("final indirecto"==data[3]){ 
+                url="./finalindirecto.php";
+               } else {
+                url="./"+data[3]+".php";
+               }
             $(location).attr('href',url);
         }        
     }).fail( function() {
@@ -114,7 +122,11 @@ $(document).on("click", "#form3b", function(){
            console.log(data);
            alert("Bienvenido:"+data[3]);
 
-           url="./"+data[3]+".php";
+           if("final indirecto"==data[3]){ 
+            url="./finalindirecto.php";
+           } else {
+            url="./"+data[3]+".php";
+           }
            $(location).attr('href',url);
         }        
     }).fail( function() {

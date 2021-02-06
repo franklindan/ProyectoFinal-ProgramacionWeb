@@ -13,33 +13,33 @@ $usuario_idPukllay = (isset($_POST['usuario_idPukllay'])) ? $_POST['usuario_idPu
 
 switch($opcion){
     case 1: 
-        $consulta = "INSERT INTO FinalIndirecto (dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay) VALUES('$dniFinal','$nombreFinal','$apelFinal','$usuario_usuarioUsuario','$usuario_idPukllay')";
+        $consulta = "INSERT INTO finalindirecto (dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay) VALUES('$dniFinal','$nombreFinal','$apelFinal','$usuario_usuarioUsuario','$usuario_idPukllay')";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute(); 
 
-        $consulta = "SELECT dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay FROM FinalIndirecto where dniFinal='$dniFinal'";
+        $consulta = "SELECT dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay FROM finalindirecto where dniFinal='$dniFinal'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;
     case 2: 
-        $consulta = "update FinalIndirecto SET nombreFinal='$nombreFinal', apelFinal='$apelFinal' WHERE dniFinal='$dniFinal'";	
+        $consulta = "update finalindirecto SET nombreFinal='$nombreFinal', apelFinal='$apelFinal' WHERE dniFinal='$dniFinal'";	
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();        
         
-        $consulta = "SELECT dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay FROM FinalIndirecto where dniFinal='$dniFinal'";
+        $consulta = "SELECT dniFinal,nombreFinal,apelFinal,usuario_usuarioUsuario,usuario_idPukllay FROM finalindirecto where dniFinal='$dniFinal'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;        
     case 3:
-        $consulta = "DELETE FROM FinalIndirecto WHERE dniFinal='$dniFinal'";
+        $consulta = "DELETE FROM finalindirecto WHERE dniFinal='$dniFinal'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
         break;  
     case 4: 
-        $consulta = "SELECT * FROM FinalIndirecto where usuario_idPukllay='$usuario_idPukllay'";
+        $consulta = "SELECT * FROM finalindirecto where usuario_idPukllay='$usuario_idPukllay'";
         $resultado = $conexion->prepare($consulta);
         $resultado->execute();
         $data=$resultado->fetchAll(PDO::FETCH_ASSOC);

@@ -20,7 +20,7 @@ $(document).ready(function(){
                         idComparsa = dat['idComparsa'];      
                         nombreComp = dat['nombreComp'];
                         Procedencia = dat['Procedencia'];
-                        Categoría = dat['Categoría'];
+                        Categoría = dat['Categoria'];
                         CantidadPart = dat['CantidadPart'];
                         Financiamiento = dat['Financiamiento'];
                         delegado_dniDele = dat['delegado_dniDele'];
@@ -111,7 +111,7 @@ $(document).ready(function(){
                         idComparsa = dat['idComparsa'];      
                         nombreComp = dat['nombreComp'];
                         Procedencia = dat['Procedencia'];
-                        Categoría = dat['Categoría'];
+                        Categoría = dat['Categoria'];
                         CantidadPart = dat['CantidadPart'];
                         Financiamiento = dat['Financiamiento'];
                         delegado_dniDele = dat['delegado_dniDele'];
