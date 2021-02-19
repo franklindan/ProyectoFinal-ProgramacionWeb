@@ -3,6 +3,52 @@ include_once 'conexiondatos.php';
 $conexion=new mysqli($host,$user,$password,$database,$port);
 if($conexion->connect_error) die("No se ha podido conectar a la base de datos");
 
+/* validando datos */
+
+if (isset($_POST['usuarioUsuario']) &&
+    isset($_POST['idPukllay']))
+{
+    $usuarioUsuario = get_post($conexion, 'usuarioUsuario');
+    $idPukllay = get_post($conexion, 'idPukllay');
+    $query = "SELECT * from usuario where usuarioUsuario='$usuarioUsuario' and idPukllay='$idPukllay'";
+    $result = $conexion->query($query);
+    $row = $result->fetch_array(MYSQLI_NUM);
+    if (!$result) echo "INSERT falló <br><br>";
+    if($row!=null){
+         print json_encode($row, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
+    }
+}
+
+if (isset($_POST['nombrec']) && 
+    isset($_POST['idPukllayc']))
+{
+    $nombrec = get_post($conexion, 'nombrec');
+    $idPukllayc = get_post($conexion, 'idPukllayc');
+    $query = "SELECT * from comparsa inner join delegado on delegado_dniDele=dniDele where nombreComp='$nombrec' and usuario_idPukllay='$idPukllayc'";
+    $result = $conexion->query($query);
+    $row = $result->fetch_array(MYSQLI_NUM);
+    if (!$result) echo "INSERT falló <br><br>";
+    if($row!=null){
+         print json_encode($row, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
+    }
+}
+
+if (isset($_POST['dnic']) && 
+    isset($_POST['idPukllayc']))
+{
+    $dnic = get_post($conexion, 'dnic');
+    $idPukllayc = get_post($conexion, 'idPukllayc');
+    $query = "SELECT * from comparsa inner join delegado on delegado_dniDele=dniDele where delegado_dniDele='$dnic' and usuario_idPukllay='$idPukllayc'";
+    $result = $conexion->query($query);
+    $row = $result->fetch_array(MYSQLI_NUM);
+    if (!$result) echo "INSERT falló <br><br>";
+    if($row!=null){
+         print json_encode($row, JSON_UNESCAPED_UNICODE); //enviar el array final en formato json a JS
+    }
+}
+
+/* insertando delegado y comparsa */
+
 if (isset($_POST['usuarioUsuario']) &&
     isset($_POST['nombDele']) &&
     isset($_POST['apelDele']) &&
@@ -17,6 +63,9 @@ if (isset($_POST['usuarioUsuario']) &&
     $pswUsuario = get_post($conexion, 'pswUsuario');
     // $pass = get_post($conexion, 'dnid');//password_hash(get_post($conexion,'dnid'), PASSWORD_DEFAULT);
     $idPukllay = get_post($conexion, 'idPukllay');
+    if($usuarioUsuario==""){
+        die;
+    }
     $query = "INSERT INTO usuario (idPukllay,usuarioUsuario, paswUsuario,tipoUsuario,estadoUsuario) VALUES ('$idPukllay', '$usuarioUsuario', '$pswUsuario', 'delegado','activo')";
     $result = $conexion->query($query);
     if (!$result) echo "INSERT falló <br><br>";
@@ -38,6 +87,9 @@ if (isset($_POST['nombrec']) &&
     $cantidad = get_post($conexion, 'cantidad');
     $categoria = get_post($conexion, 'categoria');
     $dnic = get_post($conexion, 'dnic');
+    if($dnic==""){
+        die;
+    }
     $query = "INSERT INTO comparsa (nombreComp,Procedencia, Categoria,CantidadPart,delegado_dniDele) VALUES ('$nombrec', '$procedencia', '$categoria', '$cantidad','$dnic')";
     $result = $conexion->query($query);
     if (!$result) echo "INSERT falló <br><br>";
