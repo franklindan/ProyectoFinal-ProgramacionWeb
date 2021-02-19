@@ -46,9 +46,10 @@ if (isset($_POST['dni'])&&
             else die("Usuario/password incorrecto");
         }
         else die("Usuario/password incorrecto");
+        $conexion->close();
     }
 
-    $conexion->close();
+
     function mysql_entities_fix_string($conexion, $string)
     {
         return htmlentities(mysql_fix_string($conexion, $string));
@@ -70,7 +71,7 @@ if ( isset($_POST['dnir']) &&
     isset($_POST['correor'])) 
 {
 
-$dnir =$_POST['dnir'];
+$dnir = $_POST['dnir'];
 $correor = $_POST['correor'];
 
 $query = "SELECT * from usuario where usuarioUsuario='$dnir'";
@@ -93,63 +94,124 @@ if("administrador"==$tipo){
     $consulta="SELECT * from administrador where coreAdmi='$correor' and dniAdministrador='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
-    if (!$result) die ("Falló el acceso a la base de datos");
+    if (!$resultado) die ("Falló el acceso a la base de datos");
+    // if (!$resultado) die ($conexion->error);
+    // if (!$resultado) {
+    //     exit(1);
+    // }
+    // if (!$resultado) {
+    //     die;
+    // }
     if ($resultado){
-        $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña;
-        mail($correor,"Recuperación de contraseña",$contenido);
+        $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña."";
+        $header = "From: noreply@example.com" . "\r\n";
+		$header.= "Reply-to: noreply@example.com" . "\r\n";
+		$header.= "X-Mailer: PHP/" . phpversion();
+        mail($correor,"Recuperación de contraseña",$contenido,$header);
     }
     $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
+    
 
-}
+    }
 if("operario"==$tipo){
     $consulta="SELECT * from operario where coreOper='$correor' and dniOper='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
-    if (!$result) die ("Falló el acceso a la base de datos");
+    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    if (!$resultado) die ("Falló el acceso a la base de datos");
+    // if (!$resultado) die ($conexion->error);
+    // if (!$resultado) {
+    //     exit(1);
+    // }
+    // if (!$resultado) {
+    //     die;
+    // }
     if ($resultado){
         $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña;
-        mail($correor,"Recuperación de contraseña",$contenido);
+        $header = "From: noreply@example.com" . "\r\n";
+		$header.= "Reply-to: noreply@example.com" . "\r\n";
+		$header.= "X-Mailer: PHP/" . phpversion();
+        mail($correor,"Recuperación de contraseña",$contenido,$header);
     }
-    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
 
 }
 if("jurado"==$tipo){
     $consulta="SELECT * from jurado where coreJurado='$correor' and dniJurado='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
-    if (!$result) die ("Falló el acceso a la base de datos");
+    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    if (!$resultado) die ("Falló el acceso a la base de datos");
+    // if (!$resultado) die ($conexion->error);
+    // if (!$resultado) {
+    //     exit(1);
+    // }
+    // if (!$resultado) {
+    //     die;
+    // }
     if ($resultado){
         $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña;
-        mail($correor,"Recuperación de contraseña",$contenido);    
+        $header = "From: noreply@example.com" . "\r\n";
+		$header.= "Reply-to: noreply@example.com" . "\r\n";
+		$header.= "X-Mailer: PHP/" . phpversion();
+        mail($correor,"Recuperación de contraseña",$contenido,$header);    
     }
-    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
 
 }
 if("delegado"==$tipo){
     $consulta="SELECT * from delegado where coreDele='$correor' and dniDele='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
-    if (!$result) die ("Falló el acceso a la base de datos");
+    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    if (!$resultado) die ("Falló el acceso a la base de datos");
+    // if (!$resultado) die ($conexion->error);
+    // if (!$resultado) {
+    //     exit(1);
+    // }
+    // if (!$resultado) {
+    //     die;
+    // }
     if ($resultado){
         $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña;
-        mail($correor,"Recuperación de contraseña",$contenido);    
+        $header = "From: noreply@example.com" . "\r\n";
+		$header.= "Reply-to: noreply@example.com" . "\r\n";
+		$header.= "X-Mailer: PHP/" . phpversion();
+        mail($correor,"Recuperación de contraseña",$contenido,$header);    
     }
-    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
 }
 if("final indirecto"==$tipo){
     $consulta="SELECT * from finalindirecto where coreFinal='$correor' and dniFinal='$dnir'";
     $resultado = $conexion->prepare($consulta);
     $resultado->execute();
-    if (!$result) die ("Falló el acceso a la base de datos");
+    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    if (!$resultado) die ("Falló el acceso a la base de datos");
+    // if (!$resultado) die ($conexion->error);
+    // if (!$resultado) {
+    //     exit(1);
+    // }
+    // if (!$resultado) {
+    //     die;
+    // }
     if ($resultado){
         $contenido="Estimado usuario ".$dnir." su contraseña es:".$contraseña;
-        mail($correor,"Recuperación de contraseña",$contenido);    
+        $header = "From: noreply@example.com" . "\r\n";
+		$header.= "Reply-to: noreply@example.com" . "\r\n";
+		$header.= "X-Mailer: PHP/" . phpversion();
+        mail($correor,"Recuperación de contraseña",$contenido,$header);    
     }
-    $data=$resultado->fetchAll(PDO::FETCH_ASSOC);
+    print json_encode($data, JSON_UNESCAPED_UNICODE);
+    
 
 }
-print json_encode($data, JSON_UNESCAPED_UNICODE);
+
 }
- //enviar el array final en formato json a JS
+
 $conexion = NULL;
 ?>

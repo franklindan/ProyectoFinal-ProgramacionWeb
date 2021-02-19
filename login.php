@@ -138,8 +138,8 @@
                    <h1 class="font-weight-bold mb-4">Bienvenido de vuelta</h1>
                    <form id='formC'>
                      <div class="mb-4">
-                        <label for="perfil" class="form-label font-weight-bold">Perfil</label>
-                        <select class="form-control" name="cboNivel">
+                        <label for="selectU" class="form-label font-weight-bold">Perfil</label>
+                        <select id="selectU" class="form-control">
 				            <option>Delegado</option>
                             <option>Jurado</option>	
                             <option>Operario</option>
@@ -149,14 +149,15 @@
                       </div>
                       <div class="mb-4">
                         <label for="dni" class="form-label font-weight-bold">DNI usuario</label>
-                        <input type="text" class="form-control" id="dni" placeholder="Ingrese su dni">
+                        <input type="number" min="10000000" max="99999999" class="form-control" id="dni" placeholder="Ingrese su dni" required>
                       </div>
                       <div class="mb-4">
                         <label for="contraseña" class="form-label font-weight-bold">Contraseña</label>
-                        <input type="password" class="form-control mb-2" id="contraseña" placeholder="Ingrese su contraseña">
+                        <input type="password" class="form-control mb-2" id="contraseña" placeholder="Ingrese su contraseña" required>
                         <a href="#" id="recuperar" class="form-text text-light text-decoration-none">¿Olvidaste tu contraseña?</a>
                       </div>
-                      <input id="formb" type="submit" class="btn btn-primary w-100" value="Iniciar sesión">
+                      <button id="formb" type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                      <!-- <input id="formb" type="submit" class="btn btn-primary w-100" value="Iniciar sesión"> -->
                     </form>
 
                     </div>
